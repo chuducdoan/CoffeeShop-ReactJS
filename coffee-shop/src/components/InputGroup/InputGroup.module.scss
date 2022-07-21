@@ -1,0 +1,27 @@
+.formGroup {
+    position: relative;
+    margin-bottom: 16px;
+    input {
+        padding: 12px 16px 12px 44px;
+        width: 100%;
+        outline: none;
+        border: 1px solid var(--black4);
+        background: var(--black4);
+        color: var(--white);
+        border-radius: 4px;
+        &:focus {
+            background-color: var(--white);
+            color: var(--black);
+        }
+    }
+    .icon {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        color: var(--gray2);
+    }
+}

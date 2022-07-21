@@ -1,5 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap');
+:root {
+    --white: #fff;
+    --blue: #1874eb;
+    --red: #DB4437;
+    --blueLight: #00ACEE;
+    --fontMain: 'Open Sans', sans-serif;
+    --fontTittleHead: 'Marcellus', serif;
+    --black: #262626;
+    --blackSecondary: #161616;
+    --black3: #121212;
+    --black4: #232a31;
+    --black5: #0c2f55;
+    --yellow: #be9c79;
+    --yellow2: #c0aa83;
+    --heightHeader: 70px;
+    --gray: #656565;
+    --gray2: #777b7f;
+    --gray3: #f3f3f3;
+    --gray4: #777;
+    --gray5: #8e9a9d;
+    --fontSize12: 12px;
+    --fontSize14: 14px;
+    --fontSize18: 18px;
+    --fontSize20: 20px;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--fontTittleHead);
+    font-weight: 400;
+    color: var(--black);
+}
+
+h6 {
+    font-weight: 300;
+    font-family: Open Sans;
+}
+
+body {
+    font-family: var(--fontMain);
+    font-size: 15px;
+    color: var(--black);
+    font-weight: 300;
+    line-height: 26px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--black);
+    transition: color .3s ease;
+}
+
+// a:hover {
+//     color: var(--yellow);
+// }
+h1,
+h2 {
+    line-height: 1.22em;
 }

@@ -1,0 +1,23 @@
+.login__other {
+    display: flex;
+    align-items: center;
+    color: var(--gray5);
+    hr {
+        flex-grow: 1;
+        height: 1px;
+        background-color: rgba( 248, 249, 250, 1)!important;
+        opacity: 0.4;
+    }
+}
+
+.login__other-text {
+    font-size: var(--fontSize14);
+    padding: 0 8px;
+    display: inline-block;
+}
+
+.login__social {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}

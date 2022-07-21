@@ -1,0 +1,104 @@
+.footer__top {
+    background-image: url(https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/footer-top-img-1.jpg);
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    text-align: center;
+    padding: 70px 0;
+}
+
+.footer__logo,
+.footer__info {
+    margin-bottom: 35px;
+}
+
+.footer__adress {
+    h5 {
+        font-size: 20px;
+        color: var(--white);
+    }
+}
+
+.footer__adress {
+    a {
+        color: var(--white);
+        transition: color .3s ease;
+        &:hover {
+            color: var(--yellow2);
+        }
+    }
+}
+
+.footer__bottom {
+    padding: 25px 0;
+    background-color: var(--black3);
+    a {
+        color: var(--white);
+        .icon {
+            color: var(--white);
+        }
+    }
+    ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        li {
+            a {
+                display: inline-block;
+                transition: color .3s ease;
+                &:hover {
+                    color: var(--yellow2);
+                }
+            }
+        }
+    }
+}
+
+.footer--inner {
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.footer__copyright {
+    color: var(--white);
+}
+
+.footer__copyright {
+    p {
+        text-align: center;
+    }
+}
+
+.footer__menu {
+    ul {
+        li {
+            padding: 0 20px;
+        }
+    }
+}
+
+.footer__social {
+    ul {
+        li {
+            padding-right: 20px;
+        }
+    }
+    a {
+        &:hover {
+            .icon {
+                &:hover {
+                    color: var(--yellow2);
+                }
+            }
+        }
+    }
+    i {
+        font-size: 18px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .footer--inner {
+        width: 1140px;
+    }
+}

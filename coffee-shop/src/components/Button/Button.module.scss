@@ -1,0 +1,66 @@
+.wrapper {
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    cursor: pointer;
+    outline: none;
+}
+
+.buttonText {
+    min-width: 164;
+    padding: 18px 45px;
+    letter-spacing: 1px;
+    transition: background .3s, border-color .3s;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.primary {
+    border: 1px solid;
+    border-color: var(--yellow);
+    background: var(--yellow);
+    color: var(--white);
+    font-size: var(--fontSize14);
+    &:hover {
+        background: var(--white);
+        border-color: var(--black3);
+        color: var(--black3);
+    }
+}
+
+.secondary {
+    background: var(--yellow);
+    color: var(--white);
+    &:hover {
+        background: var(--black);
+    }
+}
+
+.btn--small {
+    padding: 12px 24px;
+}
+
+.buttonIconsRounded {
+    width: 38px;
+    height: 38px;
+    margin: 0 6px;
+    border-radius: 4px;
+    font-size: var(--fontSize18);
+    &:hover {
+        opacity: 0.85;
+    }
+}
+
+.buttonIconGoogle {
+    background-color: var(--red);
+}
+
+.buttonIconFacebook {
+    background-color: var(--blue);
+}
+
+.buttonIconTwitter {
+    background-color: var(--blueLight);
+}
