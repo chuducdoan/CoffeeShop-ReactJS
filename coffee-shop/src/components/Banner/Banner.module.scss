@@ -1,0 +1,72 @@
+.banner {
+    background-image: url(http://coffeeking.like-themes.com/wp-content/uploads/2017/09/coffee-parallax-2.png?id=2846);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    padding-top: 70px;
+}
+
+.banner__image-text,
+.banner__button {
+    text-align: center;
+}
+
+.banner__button {
+    display: flex;
+    justify-content: center;
+}
+
+.banner__image-text {
+    img {
+        max-width: 100%;
+    }
+}
+
+.banner__resp-top {
+    height: 160px;
+}
+
+.banner__resp-mid {
+    height: 80px;
+}
+
+.banner__resp-bottom {
+    height: 20px;
+}
+
+.visible-xs {
+    display: none;
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+    .hidden-ms {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .hidden-sm {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .hidden-xs {
+        display: none !important;
+    }
+    .visible-xs {
+        display: block !important;
+    }
+    .banner__resp {
+        height: 60px;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .banner {
+        h1 {
+            font-size: 38px;
+        }
+    }
+}

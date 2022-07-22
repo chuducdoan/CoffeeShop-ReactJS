@@ -19,7 +19,7 @@ function ProductItem({
                 </div>
                 <h5>{tittle}</h5>
             </Link>
-            <span className={cx("product__price")}>{price}</span>
+            <span className={cx("product__price")}>${price}</span>
             <Link to={to} className={cx("product__add-cart")}>Add to cart</Link>
         </div>
     );

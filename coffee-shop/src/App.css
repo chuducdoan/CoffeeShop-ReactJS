@@ -102,6 +102,11 @@
     display: flex;
 }
 
+.grid {
+    width: 1110px;
+    margin: 0 auto;
+}
+
 
 /* END: css for boostrap */
 

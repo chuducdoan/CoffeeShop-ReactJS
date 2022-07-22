@@ -1,0 +1,35 @@
+.box {
+    text-align: center;
+    padding-bottom: 45px;
+}
+
+.box__image {
+    text-align: center;
+}
+
+.box__image {
+    a {
+        display: inline-block;
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+.box {
+    h5 {
+        font-size: 20px;
+        margin-top: 20px;
+        a {
+            color: #262626;
+            transition: color .3s ease;
+            &:hover {
+                color: #c0aa83;
+            }
+        }
+    }
+    p {
+        color: #656565;
+        margin-top: 6px;
+    }
+}
