@@ -6,11 +6,19 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
+    margin-bottom: 45px;
     &:hover {
         box-shadow: 0 0px 10px rgb(146 146 146 / 40%);
         .product__add-cart {
             transform: translateY(0);
         }
+    }
+    h5 {
+        padding: 12px 0;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: color .3s;
     }
 }
 

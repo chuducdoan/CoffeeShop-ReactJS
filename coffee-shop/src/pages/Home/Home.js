@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import Banner from "~/components/Banner";
 import BlogItem from "~/components/BlogItem";
 import BoxItem from "~/components/BoxItem";
+import Galley from "~/components/Galley";
 import ProductItem from "~/components/ProductItem";
 import TextWrapper from "~/components/TextWrapper";
 import config from "~/config";
@@ -9,11 +10,45 @@ import config from "~/config";
 import style from './Home.module.scss';
 
 const cx = classNames.bind(style);
+const galleys = [
+    {
+        title: 'Perfect Cup',
+        image: 'assets/images/perfect-cup.jpg'
+    },
+    {
+        title: 'Coffee drips',
+        image: 'assets/images/coffee-drep.jpg'
+    },
+    {
+        title: 'Brewed',
+        image: 'assets/images/brew.jpg'
+    },
+    {
+        title: 'Banked bean',
+        image: 'assets/images/baked-bean.jpg'
+    },
+    {
+        title: 'Perfect Cup',
+        image: 'assets/images/perfect-cup.jpg'
+    },
+    {
+        title: 'Coffee drips',
+        image: 'assets/images/coffee-drep.jpg'
+    },
+    {
+        title: 'Brewed',
+        image: 'assets/images/brew.jpg'
+    },
+    {
+        title: 'Banked bean',
+        image: 'assets/images/baked-bean.jpg'
+    },
+]
 
 function Home() {
     return ( 
         <div>
-            <Banner title="View Product">
+            <Banner title="View Product" home>
                 <img src="assets/images/home-2-logo-1.png" alt=""/>
             </Banner>
             <section className={cx("content")}>
@@ -95,7 +130,7 @@ function Home() {
                 </div>
                 <div className={cx("product-feature")}>
                     <TextWrapper 
-                    tittle="Our Delicious Offer"
+                    tittle="Online Coffee Shop"
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore"
                     />
                     <div className="grid">
@@ -134,6 +169,13 @@ function Home() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className={cx("blog", "blog--secondary")}>
+                    <TextWrapper 
+                        tittle="Our Sweet Gallery"
+                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore"
+                    />
+                    <Galley galleys={galleys} />
                 </div>
             </section>
         </div>

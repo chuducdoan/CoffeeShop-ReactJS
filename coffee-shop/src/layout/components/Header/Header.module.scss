@@ -59,6 +59,13 @@
                         }
                     }
                 }
+                &.active {
+                    span {
+                        &::after {
+                            width: 100%;
+                        }
+                    }
+                }
             }
             span {
                 position: relative;
@@ -71,13 +78,6 @@
                     right: 0;
                     bottom: -6px;
                     transition: all .3s ease;
-                }
-            }
-            &.active {
-                span {
-                    &::after {
-                        width: 100%;
-                    }
                 }
             }
         }
@@ -165,5 +165,14 @@
         img {
             height: 100%;
         }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .header {
+        display: none;
+    }
+    .header-mobile {
+        display: block;
     }
 }

@@ -15,6 +15,7 @@
     transition: background .3s, border-color .3s;
     font-weight: 600;
     font-family: inherit;
+    display: inline-block;
 }
 
 .primary {
@@ -38,8 +39,22 @@
     }
 }
 
+.small {
+    padding: 12px 24px;
+    min-width: 110px;
+}
+
 .btn--small {
     padding: 12px 24px;
+}
+
+.fullWidth {
+    width: 100%;
+    min-width: auto;
+    &:hover {
+        background-color: var(--white);
+        color: var(--black);
+    }
 }
 
 .buttonIconsRounded {

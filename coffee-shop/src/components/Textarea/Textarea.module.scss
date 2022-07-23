@@ -1,0 +1,12 @@
+.c-form {
+    width: 100%;
+    color: #656565;
+    border: 1px solid #989898;
+    outline: none;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-family: inherit;
+    &:focus {
+        border: 1px solid #be9c79;
+    }
+}

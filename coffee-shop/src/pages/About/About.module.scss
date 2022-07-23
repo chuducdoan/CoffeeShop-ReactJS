@@ -1,0 +1,22 @@
+.about {
+    padding-top: 70px;
+}
+
+.about__author-image {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.about__author-image {
+    img {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .about__author-image {
+        img {
+            width: 50%;
+        }
+    }
+}

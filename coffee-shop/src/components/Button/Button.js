@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import {Link} from 'react-router-dom';
 import styles from './Button.module.scss';
 
 const cx = classNames.bind(styles);
@@ -12,8 +13,23 @@ function Button({
     handleOnClick,
     buttonText,
     primary,
-    secondary
+    secondary,
+    small, 
+    to,
+    fullWidth,
+    onClick,
+    ...passProp
     }) {
+    const props = {
+        onClick,
+        ...passProp
+    }
+    let Comp = 'button';
+
+    if(to) {
+        Comp = Link;
+        props.to = to;
+    }
 
     const classes = cx('wrapper', {
         buttonIconsRounded,
@@ -22,11 +38,13 @@ function Button({
         buttonIconTwitter, 
         buttonText,
         primary,
-        secondary
+        secondary,
+        small,
+        fullWidth
     })
 
     return ( 
-        <button className={classes} onClick={handleOnClick}>{children}</button>
+        <Comp className={classes} onClick={handleOnClick} {...props}>{children}</Comp>
     );
 }
 

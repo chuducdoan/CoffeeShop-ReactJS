@@ -1,0 +1,118 @@
+.product-list {
+    padding: 70px 0;
+}
+
+.contact-item {
+    ul {
+        list-style: none;
+        padding-bottom: 30px;
+        li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+            &::before {
+                position: absolute;
+                top: 50%;
+                left: -7px;
+                content: "";
+                width: 5px;
+                height: 5px;
+                border-left: 2px solid var(--yellow);
+                border-bottom: 2px solid var(--yellow);
+                transform: rotate(-135deg) translateY(50%);
+            }
+        }
+    }
+}
+
+.left__item {
+    margin-bottom: 30px;
+    h5 {
+        font-size: 20px;
+        margin-bottom: 19px;
+    }
+}
+
+.left__form {
+    input {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.left__form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left__item .contact-item ul {
+    padding-bottom: 0;
+}
+
+.left__tags {
+    a {
+        &::after {
+            content: ", ";
+        }
+        &:last-child {
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
+
+.left__product-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.left__product-item {
+    img {
+        width: 100%;
+    }
+}
+
+.left__product-item {
+    .image {
+        flex-shrink: 0;
+        width: 36%;
+        display: block;
+    }
+}
+
+.left__product-content {
+    flex-grow: 1;
+    a {
+        &:hover {
+            color: var(--yellow);
+        }
+    }
+}
+
+.left__search {
+    display: flex;
+    border: 1px solid var(--gray6);
+    input,
+    button {
+        background-color: var(--white);
+        outline: none;
+        padding: 10px 0 10px 15px;
+        border: none;
+    }
+    input {
+        width: calc(100% - 50px);
+    }
+    button {
+        width: 50px;
+        padding-right: 15px;
+        cursor: pointer;
+        font-size: var(--fontSize16);
+        &:hover {
+            .icon__search {
+                color: var(--yellow);
+            }
+        }
+    }
+}

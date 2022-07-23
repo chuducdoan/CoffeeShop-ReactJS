@@ -5,11 +5,23 @@ import styles from './Banner.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Banner({title, about, contactUs, ourMenu, children}) {
+function Banner({
+    title, 
+    home, 
+    about, 
+    contactUs, 
+    ourMenu, 
+    cart,
+    productList,
+    checkout, 
+    children}) {
     const classes = cx('banner', {
         about,
         contactUs,
-        ourMenu
+        ourMenu,
+        cart,
+        checkout,
+        productList
     })
     return (
         <div className={classes}>
@@ -25,7 +37,7 @@ function Banner({title, about, contactUs, ourMenu, children}) {
                 </div>
                 <div className={cx("banner__button")}>
                     {/* <button className={cx("btn btn--primary")}>{title}</button> */}
-                    <Button buttonText primary>{title}</Button>
+                    {home && <Button buttonText primary>{title}</Button>}
                 </div>
                 <div className={cx("banner__resp")}>
                     <div className={cx("banner__resp-top", "hidden-sm", "hidden-ms", "hidden-xs")}>

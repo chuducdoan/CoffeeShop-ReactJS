@@ -7,11 +7,12 @@ const cx = classNames.bind(styles);
 function TextWrapper({
     tittle,
     description,
-    className
+    className,
+    children
     }) {
 
     return ( 
-        <div className={className}>
+        <div className={cx(className)}>
             <div className={cx("content-item")}>
                 <h2>
                     {tittle}
@@ -22,6 +23,7 @@ function TextWrapper({
                 <h6>
                     {description}
                 </h6>
+                {children}
             </div>
         </div>
     );
