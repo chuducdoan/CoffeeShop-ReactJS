@@ -1,50 +1,35 @@
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import InputGroup from '~/components/InputGroup';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import styles from './Login.module.scss';
+import styles from './SignUp.module.scss';
 import {UserAuth} from '~/context/AuthContext';
 import config from '~/config';
 import { useEffect } from 'react';
 import Button from '~/components/Button';
-import { setEmail, setPassword } from '~/action';
+import { setEmail, setFullname, setPassword, setUser } from '~/action';
 
 const cx = classNames.bind(styles);
 
-function Login() {
+function SignUp() {
     const user = useSelector(state => state.authRed.user);
     const email = useSelector(state => state.authRed.email);
     const password = useSelector(state => state.authRed.password);
+    const fullname = useSelector(state => state.authRed.fullName);
     const dispatch = useDispatch();
-    const {googleSignIn, facebookSignIn, signIn} = UserAuth();
+
+    const {signUp} = UserAuth();
     const navigate = useNavigate();
 
-    const handleGoogleSignIn = async () => {
+    const handleSignUp = async () => {
         try {
-            await googleSignIn();
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const handleFacebookGignIn = async () => {
-        try {
-            await facebookSignIn();
+            await signUp(email, password, fullname);
         } catch(error) {
             console.log(error);
-        }
-    }
-
-    const handleSignin = async () => {
-        try {
-            await signIn(email, password);
-        } catch(error) {
-            console.log(error);
-            // log message login fail
         }
     }
 
@@ -58,32 +43,36 @@ function Login() {
     return ( 
         <div>
             <div className={cx('login__body')}>
-            <InputGroup placeholder='Email Address' icon={<FontAwesomeIcon icon={faEnvelope}/>} value={email} onChange={(e) => dispatch(setEmail(e.target.value))}/>
+                <InputGroup placeholder='Full Name' icon={<FontAwesomeIcon icon={faUser}/>} value={fullname} onChange={(e) => dispatch(setFullname(e.target.value))}/>
+                <InputGroup placeholder='Email Address' icon={<FontAwesomeIcon icon={faEnvelope}/>} value={email} onChange={(e) => dispatch(setEmail(e.target.value))}/>
                 <InputGroup placeholder='Password' type="password" icon={<FontAwesomeIcon icon={faLock}/>} value={password} onChange={(e) => dispatch(setPassword(e.target.value))}/>
                 <div className={cx('login__button')}>
-                    <Button buttonText fullWidth primary handleOnClick={handleSignin}>Sign in</Button>
+                    <Button buttonText fullWidth primary handleOnClick={handleSignUp}>Sign up</Button>
                 </div>
             </div>
             <div className={cx('login__footer')}>
                 <div className={cx('login__other')}>
                     <hr/>
-                    <span className={cx('login__other-text')}>Or Login with</span>
+                    <span className={cx('login__other-text')}>Or Sign up with</span>
                     <hr/>
                 </div>
                 <div className={cx('login__social')}>
-                    <Button buttonIconsRounded buttonIconGoogle handleOnClick={handleGoogleSignIn}>
+                    <Button buttonIconsRounded buttonIconGoogle>
                         <i className="fa-brands fa-google"></i>
                     </Button>
-                    <Button buttonIconsRounded buttonIconFacebook handleOnClick={handleFacebookGignIn}>
+                    <Button buttonIconsRounded buttonIconFacebook>
                         <i className="fa-brands fa-facebook-f"></i>
                     </Button>
-                    <Button buttonIconsRounded buttonIconTwitter handleOnClick={handleGoogleSignIn}>
+                    <Button buttonIconsRounded buttonIconTwitter>
                         <i className="fab fa-twitter"></i>
                     </Button>
+                </div>
+                <div className={cx('login__exist')}>
+                    Already a member <Link to={config.routes.login}>Login now</Link>
                 </div>
             </div>
         </div>
      );
 }
 
-export default Login;
+export default SignUp;

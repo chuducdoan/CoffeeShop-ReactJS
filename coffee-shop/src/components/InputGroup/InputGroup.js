@@ -5,10 +5,10 @@ import styles from './InputGroup.module.scss';
 
 const cx = classNames.bind(styles);
 
-function InputGroup({placeholder, icon}) {
+function InputGroup({placeholder, icon, ...props}) {
     return ( 
         <div className={cx('formGroup')}>
-            <input type="text" placeholder={placeholder}/>
+            <input {...props} placeholder={placeholder}/>
             <span className={cx('icon')}>
                 {icon}
             </span>

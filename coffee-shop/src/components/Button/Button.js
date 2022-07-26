@@ -17,11 +17,10 @@ function Button({
     small, 
     to,
     fullWidth,
-    onClick,
     ...passProp
     }) {
     const props = {
-        onClick,
+        handleOnClick,
         ...passProp
     }
     let Comp = 'button';

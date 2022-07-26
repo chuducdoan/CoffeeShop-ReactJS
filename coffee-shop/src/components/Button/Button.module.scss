@@ -6,6 +6,7 @@
     color: var(--white);
     cursor: pointer;
     outline: none;
+    text-align: center;
 }
 
 .buttonText {
@@ -51,10 +52,6 @@
 .fullWidth {
     width: 100%;
     min-width: auto;
-    &:hover {
-        background-color: var(--white);
-        color: var(--black);
-    }
 }
 
 .buttonIconsRounded {

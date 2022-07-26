@@ -2,6 +2,8 @@ import classNames from 'classnames/bind';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import styles from './Footer.module.scss';
+import { Link } from 'react-router-dom';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -37,16 +39,16 @@ function Header() {
                         <div className={cx("footer__menu")}>
                             <ul>
                                 <li>
-                                    <a href="">Home</a>
+                                    <Link to={config.routes.home}>Home</Link>
                                 </li>
                                 <li>
-                                    <a href="">About</a>
+                                    <Link to={config.routes.about}>About</Link>
                                 </li>
                                 <li>
-                                    <a href="">Shop</a>
+                                    <Link to={config.routes.productList}>Shop</Link>
                                 </li>
                                 <li>
-                                    <a href="">Contact</a>
+                                    <Link to={config.routes.contact}>Contact</Link>
                                 </li>
                             </ul>
                         </div>

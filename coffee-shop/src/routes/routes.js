@@ -8,6 +8,7 @@ import Home from '~/pages/Home';
 import Login from '~/pages/Login';
 import ProductDetail from '~/pages/ProductDetail';
 import ProductList from '~/pages/ProductList';
+import SignUp from '~/pages/SignUp';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home },
@@ -17,7 +18,8 @@ const publicRoutes = [
     { path: config.routes.productList, component: ProductList },
     { path: config.routes.cart, component: Cart },
     { path: config.routes.checkout, component: Checkout },
-    { path: config.routes.login, component: Login, layout: LoginLayout }
+    { path: config.routes.login, component: Login, layout: LoginLayout },
+    { path: config.routes.signUp, component: SignUp, layout: LoginLayout },
 ];
 
 // Những router cần đăng nhập mới vào được

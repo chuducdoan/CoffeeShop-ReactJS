@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import config from "~/config/index.js";
 import Button from "../Button/Button.js";
 
 import styles from './Banner.module.scss';
@@ -32,12 +33,10 @@ function Banner({
                     <div className={cx("banner__resp-bottom", "visible-xs")}></div>
                 </div>
                 <div className={cx("banner__image-text")}>
-                    {/* <img src="../images/home-2-logo-1.png" alt=""/> */}
                     {children}
                 </div>
                 <div className={cx("banner__button")}>
-                    {/* <button className={cx("btn btn--primary")}>{title}</button> */}
-                    {home && <Button buttonText primary>{title}</Button>}
+                    {home && <Button buttonText primary to={config.routes.productList}>{title}</Button>}
                 </div>
                 <div className={cx("banner__resp")}>
                     <div className={cx("banner__resp-top", "hidden-sm", "hidden-ms", "hidden-xs")}>

@@ -1,22 +1,29 @@
 
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import AuthContextProvider from '~/context/AuthContext';
 import DefaultLayout from './layout/DefaultLayout';
 import { publicRoutes } from './routes';
 
+import { onAuthStateChanged } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setUser } from './action';
 import './App.css';
+import { auth } from './firebase';
 
 function App() {
+  
+  const dispatch = useDispatch();
 
-  const [currentUser, setCurrentUser] = useState();
-
-  // handle firebase auth changed
   useEffect(() => {
-    // const unsub = onAuthStateChanged(auth, user => setCurrentUser(user));
-    // return unsub;
-  }, [])
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            dispatch(setUser(currentUser));
+        });
+        return () => {
+            unsubscribe();
+        }
+  }, []);
 
   return (
     <AuthContextProvider>

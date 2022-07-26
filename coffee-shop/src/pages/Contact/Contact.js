@@ -2,7 +2,6 @@ import classNames from "classnames/bind";
 import Banner from "~/components/Banner";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
-import Popper from "~/components/Popper";
 import Textarea from "~/components/Textarea";
 import style from './Contact.module.scss';
 
@@ -14,7 +13,6 @@ function Contact() {
             <Banner title="About Me" contactUs>
                 <h1>Contact Us</h1>
             </Banner>
-            <Popper/>
             <section className={cx("contact-us")}>
                 <div className="grid row">
                     <div className="col-lg-6">

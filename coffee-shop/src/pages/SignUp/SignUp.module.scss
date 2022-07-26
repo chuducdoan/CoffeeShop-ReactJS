@@ -21,6 +21,16 @@
     display: flex;
     justify-content: center;
 }
+
+.login__exist {
+    text-align: center;
+    color: var(--gray5);
+    margin-top: 16px;
+    a {
+        color: var(--white);
+    }
+}
+
 .login__button {
     margin-bottom: 16px;
 }
