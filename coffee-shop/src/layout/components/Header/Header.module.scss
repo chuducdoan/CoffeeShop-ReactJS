@@ -214,6 +214,8 @@
 
 .logout {
     font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
     &:hover {
         color: var(--yellow);
     }
@@ -222,12 +224,6 @@
 .username {
     cursor: pointer;
     padding: 15px 34px 15px 10px !important;
-    img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-    }
 }
 
 @media only screen and (max-width: 1024px) {

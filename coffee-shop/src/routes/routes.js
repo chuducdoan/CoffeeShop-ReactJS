@@ -16,15 +16,14 @@ const publicRoutes = [
     { path: config.routes.contact, component: Contact },
     { path: config.routes.productDetail, component: ProductDetail },
     { path: config.routes.productList, component: ProductList },
-    { path: config.routes.cart, component: Cart },
-    { path: config.routes.checkout, component: Checkout },
     { path: config.routes.login, component: Login, layout: LoginLayout },
     { path: config.routes.signUp, component: SignUp, layout: LoginLayout },
 ];
 
 // Những router cần đăng nhập mới vào được
 const privateRoutes = [
-    { path: config.routes.home, component: Home }
+    { path: config.routes.cart, component: Cart },
+    { path: config.routes.checkout, component: Checkout }
 ];
 
 export { publicRoutes, privateRoutes };

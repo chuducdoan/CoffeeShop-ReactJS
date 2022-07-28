@@ -1,7 +1,6 @@
-import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
 import { createContext, useContext } from "react";
-import { auth, createUserDocument } from "~/firebase";
-
+import { auth } from "~/firebase";
 
 const AuthContext = createContext();
 
@@ -19,7 +18,10 @@ function AuthContextProvider({children}) {
 
     const signUp = async (email, password, displayName) => {
         const {user} =  await createUserWithEmailAndPassword(auth, email, password);
-        return createUserDocument(user, {displayName});
+        if (!user || user === null) return;
+        await updateProfile(user, {
+            displayName: displayName
+        })
     }
 
     const signIn = (email, password) => {

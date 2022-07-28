@@ -65,10 +65,11 @@ function Header() {
                                 <Tippy
                                 interactive
                                 delay={[0, 500]}
+                                placement='bottom-end'
+                                offset={[-30, 0]}
                                 render={(attrs) => (
                                     <div {...attrs}>
                                         <Popper small>
-                                            <a>{user.displayName || user.email}</a>
                                             <a onClick={handleLogout} className={cx('logout')}>
                                                 <span>Log out</span>
                                             </a>
@@ -78,7 +79,7 @@ function Header() {
                                 >
                                     <li>
                                         <a className={cx("username")}>
-                                            <img src={user.photoURL} />
+                                            <span>{user.displayName}</span>
                                         </a>
                                     </li>
                                 </Tippy>
@@ -100,6 +101,8 @@ function Header() {
                     </nav>
                     <Tippy
                     interactive
+                    placement='bottom-end'
+                    offset={[0, 0]}
                     delay={[0, 300]}
                     render={(attrs) => (
                         <div className={cx('menu-list')} {...attrs}>

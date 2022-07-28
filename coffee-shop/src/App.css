@@ -112,6 +112,12 @@
     font-size: 19px;
 }
 
+.message__error {
+    color: var(--red);
+    font-weight: 500;
+    font-size: var(--fontSize14);
+}
+
 
 /* END: css for boostrap */
 

@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import {addDoc, collection, doc, getDoc, getFirestore} from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 // Config Firebase
 const config = {
@@ -18,20 +18,3 @@ const config = {
 const appfirebase = initializeApp(config);
 export const auth = getAuth(appfirebase);
 export const db = getFirestore(appfirebase);
-
-export const createUserDocument = async (user, additionalData) => {
-    console.log('userFirebase:', user);
-    if(!user) return;
-    const collectionRef = collection(db, `users`);
-    const {email} = user;
-    const {displayName} = additionalData;
-    try {
-        await addDoc(collectionRef, {
-            email,
-            displayName,
-            createdAt: new Date()
-        })
-    } catch(error) {
-        console.log(error);
-    }
-}

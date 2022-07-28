@@ -1,17 +1,19 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import InputGroup from '~/components/InputGroup';
-import { useNavigate } from 'react-router-dom'
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import { connect, useDispatch, useSelector } from "react-redux";
 
-import styles from './Login.module.scss';
-import {UserAuth} from '~/context/AuthContext';
-import config from '~/config';
-import { useEffect } from 'react';
-import Button from '~/components/Button';
+import { useEffect, useState } from 'react';
 import { setEmail, setPassword } from '~/action';
+import Button from '~/components/Button';
+import config from '~/config';
+import { ERROR_LOGIN, MESSAGE_VALIDATE_FORMAT_EMAIL, MESSAGE_VALIDATE_LENGTH_PASSWORD, MESSAGE_VALIDATE_REQUIRE_EMAIL, MESSAGE_VALIDATE_REQUIRE_PASSWORD } from '~/constant';
+import { UserAuth } from '~/context/AuthContext';
+import { validateEmailFormat, validateLength, validateRequired } from '~/util';
+import styles from './Login.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +21,7 @@ function Login() {
     const user = useSelector(state => state.authRed.user);
     const email = useSelector(state => state.authRed.email);
     const password = useSelector(state => state.authRed.password);
+    const [messages, setMessages] = useState([]);
     const dispatch = useDispatch();
     const {googleSignIn, facebookSignIn, signIn} = UserAuth();
     const navigate = useNavigate();
@@ -40,12 +43,28 @@ function Login() {
     }
 
     const handleSignin = async () => {
+        const listMessage = [];
         try {
-            await signIn(email, password);
+            if (validateRequired(email)) {
+                listMessage.push(MESSAGE_VALIDATE_REQUIRE_EMAIL);
+            } else if (validateEmailFormat(email)) {
+                listMessage.push(MESSAGE_VALIDATE_FORMAT_EMAIL);
+            }
+            if (validateRequired(password)) {
+                listMessage.push(MESSAGE_VALIDATE_REQUIRE_PASSWORD);
+            } else if (validateLength(password, 4, 8)) {
+                listMessage.push(MESSAGE_VALIDATE_LENGTH_PASSWORD(4,8));
+            }
+            if (listMessage.length <= 0) {
+                await signIn(email, password);
+            }
         } catch(error) {
             console.log(error);
-            // log message login fail
-        }
+            listMessage.push(ERROR_LOGIN);
+        } 
+        dispatch(setEmail(''));
+        dispatch(setPassword(''));
+        setMessages(listMessage);
     }
 
     useEffect(() => {
@@ -58,6 +77,14 @@ function Login() {
     return ( 
         <div>
             <div className={cx('login__body')}>
+            {messages.length > 0 && (
+                <div className={cx('wrap__error')}>
+                    {messages.map((error, index) => (
+                        <p className='message__error' key={index}>{error}</p>
+                    ))}
+                </div>
+            )}
+            
             <InputGroup placeholder='Email Address' icon={<FontAwesomeIcon icon={faEnvelope}/>} value={email} onChange={(e) => dispatch(setEmail(e.target.value))}/>
                 <InputGroup placeholder='Password' type="password" icon={<FontAwesomeIcon icon={faLock}/>} value={password} onChange={(e) => dispatch(setPassword(e.target.value))}/>
                 <div className={cx('login__button')}>

@@ -1,17 +1,17 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import InputGroup from '~/components/InputGroup';
-import { Link, useNavigate } from 'react-router-dom'
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from 'react-router-dom';
+import InputGroup from '~/components/InputGroup';
 
-import styles from './SignUp.module.scss';
-import {UserAuth} from '~/context/AuthContext';
-import config from '~/config';
 import { useEffect } from 'react';
+import { setEmail, setFullname, setPassword } from '~/action';
 import Button from '~/components/Button';
-import { setEmail, setFullname, setPassword, setUser } from '~/action';
+import config from '~/config';
+import { UserAuth } from '~/context/AuthContext';
+import styles from './SignUp.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +20,7 @@ function SignUp() {
     const email = useSelector(state => state.authRed.email);
     const password = useSelector(state => state.authRed.password);
     const fullname = useSelector(state => state.authRed.fullName);
+    const {googleSignIn, facebookSignIn} = UserAuth();
     const dispatch = useDispatch();
 
     const {signUp} = UserAuth();
@@ -57,10 +58,10 @@ function SignUp() {
                     <hr/>
                 </div>
                 <div className={cx('login__social')}>
-                    <Button buttonIconsRounded buttonIconGoogle>
+                    <Button buttonIconsRounded buttonIconGoogle onClick={googleSignIn}>
                         <i className="fa-brands fa-google"></i>
                     </Button>
-                    <Button buttonIconsRounded buttonIconFacebook>
+                    <Button buttonIconsRounded buttonIconFacebook onClick={facebookSignIn}>
                         <i className="fa-brands fa-facebook-f"></i>
                     </Button>
                     <Button buttonIconsRounded buttonIconTwitter>

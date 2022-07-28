@@ -4,13 +4,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import AuthContextProvider from '~/context/AuthContext';
 import DefaultLayout from './layout/DefaultLayout';
-import { publicRoutes } from './routes';
+import { privateRoutes, publicRoutes } from './routes';
 
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { setUser } from './action';
 import './App.css';
 import { auth } from './firebase';
+import RequireAuth from './routes/ProtectedRoute';
 
 function App() {
   
@@ -49,6 +50,24 @@ function App() {
                 }
               />
             })}
+            <Route element={<RequireAuth/>}>
+            {
+              privateRoutes.map((value, index) => {
+              let Layout = DefaultLayout;
+              if (value.layout) {
+                Layout = value.layout;
+              } else if (value.layout === null) {
+                Layout = Fragment;
+              }
+              const Page = value.component;
+                return <Route key={index} path={value.path} element={
+                  <Layout>
+                    <Page/>
+                  </Layout>
+                } />
+              })
+            }
+            </Route>
           </Routes>
         </div>
       </Router>
