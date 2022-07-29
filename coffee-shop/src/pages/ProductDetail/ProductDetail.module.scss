@@ -142,6 +142,13 @@
         text-transform: uppercase;
         letter-spacing: 1px;
     }
+    &:hover {
+        background-color: var(--yellow);
+        color: var(--white);
+        a {
+            color: var(--white);
+        }
+    }
 }
 
 .product-detail__tabcontent {
@@ -154,5 +161,12 @@
     h2 {
         font-size: 35px;
         margin-bottom: 50px;
+    }
+}
+
+@media (max-width: 484px) {
+    .product-detail__tab {
+        display: block;
+        text-align: left;
     }
 }

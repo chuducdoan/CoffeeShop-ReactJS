@@ -173,9 +173,28 @@ function Header() {
             </header>
             <header className={cx("header-mobile")}>
                 <div className={cx("header-mobile__left")}>
-                    <Link to={"#"}>
-                        <i className="icon fa fa-bars"></i>
-                    </Link>
+                    <Tippy
+                        interactive
+                        placement='bottom-start'
+                        offset={[0,0]}
+                        trigger="click"
+                        render={(attrs) => (
+                            <div {...attrs}>
+                                <Popper menuBar>
+                                    <ul className={cx('header__menu-bar')}>
+                                        <li><Link to={config.routes.home}>Home</Link></li>
+                                        <li><Link to={config.routes.about}>About</Link></li>
+                                        <li><Link to={config.routes.productList}>Shop</Link></li>
+                                        <li><Link to={config.routes.contact}>Contact</Link></li>
+                                    </ul>
+                                </Popper>
+                            </div>
+                        )}
+                    >
+                        <button className={cx('button__menu-bar')}>
+                            <i className="icon fa fa-bars"></i>
+                        </button>
+                    </Tippy>
                 </div>
                 <div className={cx("header-mobile__right")}>
                     <Link to={"#"}>

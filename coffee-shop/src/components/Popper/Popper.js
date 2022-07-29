@@ -5,10 +5,10 @@ import styles from './Popper.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Popper({children, small}) {
+function Popper({children, small, menuBar}) {
 
     return ( 
-        <div className={cx("wrapper", {small})}>
+        <div className={cx("wrapper", {small, menuBar})}>
             {children}
         </div>
     );
