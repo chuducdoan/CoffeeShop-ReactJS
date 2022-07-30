@@ -7,14 +7,15 @@ const initState = {
     user: null,
     email: '',
     password: '',
-    fullName: ''
+    fullName: '',
+    numberCart: 0,
+    Carts: []
 }
 
 const authReducer = (state = initState, action) => {
     
     switch(action.type) {
         case LOGOUT:
-            console.log('this is logout')
             signOut(auth);
             return state;
         case SET_USER:
@@ -37,6 +38,7 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 fullName: action.payload
             }
+
         default:
             console.log("exception");
             return state;

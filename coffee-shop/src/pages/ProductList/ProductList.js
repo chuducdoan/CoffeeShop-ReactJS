@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import { useEffect } from "react";
 import Banner from "~/components/Banner";
 import Button from "~/components/Button";
 import ProductItem from "~/components/ProductItem";
@@ -8,6 +9,11 @@ import style from './ProductList.module.scss';
 const cx = classNames.bind(style);
 
 function ProductList() {
+
+    useEffect(() => {
+
+    }, []);
+
     return ( 
         <>
             <Banner title="Product List" productList>
