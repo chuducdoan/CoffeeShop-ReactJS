@@ -1,6 +1,7 @@
 import config from '~/config';
 import LoginLayout from '~/layout/LoginLayout/LoginLayout';
 import About from '~/pages/About';
+import BlogDetail from '~/pages/BlogDetail';
 import Cart from '~/pages/Cart';
 import Checkout from '~/pages/Checkout';
 import Contact from '~/pages/Contact';
@@ -16,6 +17,7 @@ const publicRoutes = [
     { path: config.routes.contact, component: Contact },
     { path: config.routes.productDetail, component: ProductDetail },
     { path: config.routes.productList, component: ProductList },
+    { path: config.routes.blogDetail, component: BlogDetail },
     { path: config.routes.login, component: Login, layout: LoginLayout },
     { path: config.routes.signUp, component: SignUp, layout: LoginLayout },
 ];

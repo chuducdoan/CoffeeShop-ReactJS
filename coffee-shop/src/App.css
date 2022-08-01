@@ -162,6 +162,11 @@
         flex: 0 0 66.666667%;
         max-width: 66.666667%;
     }
+    .col-md-9 {
+        -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
     .content-item h6 {
         width: 80%;
     }
@@ -196,6 +201,11 @@
         -ms-flex: 0 0 66.666667%;
         flex: 0 0 66.666667%;
         max-width: 66.666667%;
+    }
+    .col-lg-9 {
+        -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+        max-width: 75%;
     }
     .content-item h6 {
         width: 50%;
