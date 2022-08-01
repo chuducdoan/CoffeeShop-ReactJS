@@ -1,4 +1,5 @@
 import { EMAIL_REGEX_FORMAT } from "~/constant";
+import * as moment from 'moment';
 
 const validateRequired = (value) => {
     if (value.length === 0 || value === '') {
@@ -19,4 +20,8 @@ const validateEmailFormat = (value) => {
     }
 }
 
-export {validateRequired, validateLength, validateEmailFormat};
+const formatDate = (dateNumber) => {
+    return moment(new Date(dateNumber)).format('DD/MM/YYYY');
+}
+
+export {validateRequired, validateLength, validateEmailFormat, formatDate};

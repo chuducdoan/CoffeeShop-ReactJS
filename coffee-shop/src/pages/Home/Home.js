@@ -1,4 +1,7 @@
 import classNames from "classnames/bind";
+import { useEffect, useState } from "react";
+
+import blogApi from "~/api/blogApi";
 import Banner from "~/components/Banner";
 import BlogItem from "~/components/BlogItem";
 import BoxItem from "~/components/BoxItem";
@@ -6,7 +9,6 @@ import Galley from "~/components/Galley";
 import ProductItem from "~/components/ProductItem";
 import TextWrapper from "~/components/TextWrapper";
 import config from "~/config";
-
 import style from './Home.module.scss';
 
 const cx = classNames.bind(style);
@@ -46,6 +48,25 @@ const galleys = [
 ]
 
 function Home() {
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        try {
+            const fetchBlogList = async () => {
+                const params = {
+                    _sort: 'createAt',
+                    _order: 'desc',
+                    _limit: 3
+                }
+                const response = await blogApi.getAll(params);
+                setBlogs(response.data);
+            }
+            fetchBlogList();
+        } catch(error) {
+            console.log(error)
+        }
+    }, []);
+
     return ( 
         <div>
             <Banner title="View Product" home>
@@ -101,30 +122,14 @@ function Home() {
                     />
                     <div className="grid">
                         <div className="row">
-                            <div className="col-sm-6 col-md-4 col-lg-4">
-                                <BlogItem
-                                to="#"
-                                tittle="Prep Techniques"
-                                description="Quisque rutrum, aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi, nam eget dui. Etiam rhoncus maecenas tempus, "
-                                image="assets/images/blog1.jpg"
-                                />
-                            </div>  
-                            <div className="col-sm-6 col-md-4 col-lg-4">
-                                <BlogItem
-                                to="#"
-                                tittle="Prep Techniques"
-                                description="Quisque rutrum, aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi, nam eget dui. Etiam rhoncus maecenas tempus, "
-                                image="assets/images/blog2.jpg"
-                                />
-                            </div>  
-                            <div className="col-sm-6 col-md-4 col-lg-4">
-                                <BlogItem
-                                to="#"
-                                tittle="Prep Techniques"
-                                description="Quisque rutrum, aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi, nam eget dui. Etiam rhoncus maecenas tempus, "
-                                image="assets/images/blog3.jpg"
-                                />
-                            </div>  
+                            {blogs.map((blog, index) => (
+                                <div className="col-sm-6 col-md-4 col-lg-4" key={index}>
+                                    <BlogItem
+                                    to={`${config.routes.blogDetail}/${blog.id}`}
+                                    blog={blog}
+                                    />
+                                </div>  
+                            ))} 
                         </div>
                     </div>
                 </div>

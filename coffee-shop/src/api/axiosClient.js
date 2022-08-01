@@ -1,8 +1,6 @@
 import axios from "axios";
 import queryString from 'query-string';
 
-console.log(process.env.REACT_APP_API_URL)
-
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {

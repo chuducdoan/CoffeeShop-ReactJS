@@ -5,24 +5,22 @@ import styles from './BlogItem.module.scss';
 const cx = classNames.bind(styles);
 
 function BlogItem({
-    image,
     to,
-    tittle,
-    description,
+    blog
     }) {
 
     return ( 
         <div className={cx("blog__item")}>
             <Link to={to}>
                 <div className={cx("blog__image")}>
-                    <img src={image} alt=""/>
+                    <img src={blog.thumnailUrl} alt=""/>
                 </div>
             </Link>
             <h5 className={cx("blog__title")}>
                 <Link to={to}>
-                {tittle} </Link>
+                {blog.name} </Link>
             </h5>
-            <p>{description}</p>
+            <p>{blog.description}</p>
             <Link to={to} className={cx("blog__more")}>
                 <span>Read More</span>
             </Link>

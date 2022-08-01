@@ -30,7 +30,7 @@ function Header() {
             <header className={cx("header")}>
                 <div className={cx("header__left")}>
                     <Link to={config.routes.home}>
-                        <img src="assets/images/logo.png" alt=""/>
+                        <img src="./assets/images/logo.png" alt=""/>
                     </Link>
                 </div>
                 <div className={cx("header__right")}>
@@ -198,7 +198,7 @@ function Header() {
                 </div>
                 <div className={cx("header-mobile__right")}>
                     <Link to={"#"}>
-                        <img src="assets/images/logo-mobile.png" alt=""/>
+                        <img src="./assets/images/logo-mobile.png" alt=""/>
                     </Link>
                 </div>
             </header>
