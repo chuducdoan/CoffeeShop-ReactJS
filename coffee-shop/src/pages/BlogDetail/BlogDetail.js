@@ -32,11 +32,6 @@ function BlogDetail() {
             }
             fetchBlog();
             fetchBlogNews();
-
-            // return () => {
-            //     fetchBlog();
-            //     fetchBlogNews();
-            // }
         } catch(error) {
             console.log(error);
         }
