@@ -7,6 +7,8 @@ export const SET_FULLNAME = 'set_fullname';
 export const ADD_CART = 'add_cart';
 export const REMOVE_CART = 'remove_cart';
 export const UPDATE_CART = 'update_cart';
+export const INCREASE_TO_CART = 'increase_to_cart';
+export const DECREASE_TO_CART = 'decrease_to_cart';
 
 export const MESSAGE_VALIDATE_REQUIRE_EMAIL = 'Email is required.'
 export const MESSAGE_VALIDATE_REQUIRE_PASSWORD = 'Password is required.'

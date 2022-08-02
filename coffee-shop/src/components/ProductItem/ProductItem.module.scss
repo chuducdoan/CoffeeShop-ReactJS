@@ -45,6 +45,7 @@
 }
 
 .product__add-cart {
+    display: inline-block;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -54,11 +55,14 @@
     font-size: var(--fontSize12);
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 9px 0;
+    padding: 12px 0;
     transition: all .3s;
     transform: translateY(50px);
     z-index: 2;
     font-weight: 600;
+    border: none;
+    outline: none;
+    cursor: pointer;
     &:hover {
         background-color: var(--black);
     }

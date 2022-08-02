@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
-import { logout, setEmail, setPassword } from '~/action';
+import { logout, removeCart, setEmail, setPassword } from '~/action';
 import Button from '~/components/Button';
 import Popper from '~/components/Popper';
 import config from '~/config';
@@ -16,14 +16,17 @@ const cx = classNames.bind(styles);
 function Header() {
     const user = useSelector(state => state.authRed.user);
     const numberCart = useSelector(state => state.cartRed.numberCart);
+    const carts = useSelector(state => state.cartRed.Carts);
     const dispatch = useDispatch();
-
-    console.log(user)
 
     const handleLogout = () => {
         dispatch(logout());
         dispatch(setEmail(''));
         dispatch(setPassword(''));
+    }
+
+    const handleRemoveCartItem = (cartId) => {
+        dispatch(removeCart(cartId))
     }
 
     return ( 
@@ -108,57 +111,47 @@ function Header() {
                     render={(attrs) => (
                         <div className={cx('menu-list')} {...attrs}>
                             <Popper>
-                                <ul>
-                                    <li>
-                                        <div className={cx("left__product-item")}>
-                                            <Link to={"/"} className={cx("image")}>
-                                                <img src="assets/images/product3.png" alt=""/>
-                                            </Link>
-                                            <div className={cx("left__product-content")}>
-                                                <Link to={"/"} className={cx('product__title')}>
-                                                    <span>Columbia Coffee</span>
-                                                </Link>
-                                                <div className={cx("quantity")}>
-                                                    <span className={cx("quantity__lable")}>Quantity:</span><span>2</span>
+                                {carts.length > 0 ? (
+                                    <ul>
+                                        {carts.map((cart, index) => (
+                                            <li key={index}>
+                                                <div className={cx("left__product-item")}>
+                                                    <Link to={`${config.routes.productDetail}/${cart.id}`} className={cx("image")}>
+                                                        <img src={cart.image} alt={cart.name}/>
+                                                    </Link>
+                                                    <div className={cx("left__product-content")}>
+                                                        <Link to={`${config.routes.productDetail}/${cart.id}`} className={cx('product__title')}>
+                                                            <span>{cart.name}</span>
+                                                        </Link>
+                                                        <div className={cx("quantity")}>
+                                                            <span className={cx("quantity__lable")}>Quantity:</span><span>{cart.quantity}</span>
+                                                        </div>
+                                                        <span className={cx("price")}>${cart.price}</span>
+                                                    </div>
+                                                    <span className={cx("close")} onClick={() => handleRemoveCartItem(cart.id)}>
+                                                        <i className="fa fa-times"></i>
+                                                    </span>
                                                 </div>
-                                                <span className={cx("price")}>$25.00</span>
+                                            </li>
+                                        ))}
+                                        <li className={cx("cart__bottom")}>
+                                            <div className={cx("cart__subtotal")}>
+                                                <span className="eltdf-total">TOTAL:</span>
+                                                <span className="eltdf-total-amount">
+                                                    <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>64.00</span>
+                                                </span>
                                             </div>
-                                            <span className={cx("close")}>
-                                                <i className="fa fa-times"></i>
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className={cx("left__product-item")}>
-                                            <Link to={"/"} className={cx("image")}>
-                                                <img src="assets/images/product3.png" alt=""/>
-                                            </Link>
-                                            <div className={cx("left__product-content")}>
-                                                <Link to={"/"} className={cx('product__title')}>
-                                                    <span>Columbia Coffee</span>
-                                                </Link>
-                                                <div className={cx("quantity")}>
-                                                    <span className={cx("quantity__lable")}>Quantity:</span><span>2</span>
-                                                </div>
-                                                <span className={cx("price")}>$25.00</span>
+                                            <div>
+                                                <Button buttonText secondary fullWidth to={config.routes.cart}>View Cart</Button>
                                             </div>
-                                            <span className={cx("close")}>
-                                                <i className="fa fa-times"></i>
-                                            </span>
-                                        </div>
-                                    </li>
-                                    <li className={cx("cart__bottom")}>
-                                        <div className={cx("cart__subtotal")}>
-                                            <span className="eltdf-total">TOTAL:</span>
-                                            <span className="eltdf-total-amount">
-                                                <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>64.00</span>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <Button buttonText secondary fullWidth to={config.routes.cart}>View Cart</Button>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                ) : (
+                                    <div>
+                                        <p>Cart empty!</p>
+                                    </div>
+                                )}
+                                
                             </Popper>
                         </div>
                     )}

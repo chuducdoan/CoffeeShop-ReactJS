@@ -1,6 +1,8 @@
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { addCart } from "~/action";
 import categoryApi from "~/api/categoryApi";
 import productApi from "~/api/productApi";
 import Banner from "~/components/Banner";
@@ -17,6 +19,7 @@ function ProductList() {
     const [categories, setCategories] = useState([]);
     const [searchText, setSearchText] = useState('');
     const textResult = useRef(searchText);
+    const dispatch = useDispatch();
 
     const categoriesRef = useRef(categories);
     const search = useLocation().search;
@@ -61,6 +64,10 @@ function ProductList() {
         fecthProductSearch();
         textResult.current = `Result search by: ${searchText}`;
         setSearchText('');
+    }
+
+    const handleAddToCart = (product) => {
+       dispatch(addCart(product));
     }
 
     return ( 
@@ -119,6 +126,7 @@ function ProductList() {
                                         <ProductItem 
                                         to={`${config.routes.productDetail}/${product.id}`}
                                         product={product}
+                                        handleOnClick={() => handleAddToCart(product)}
                                         />
                                     </div>
                                 ))}
