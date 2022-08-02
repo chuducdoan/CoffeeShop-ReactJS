@@ -12,9 +12,9 @@ function Header() {
         <footer className={cx("footer")}>
             <div className={cx("footer__top")}>
                 <div className={cx("footer__logo")}>
-                    <a href="">
+                    <Link to={"/"}>
                         <img src="assets/images/logo.png" alt=""/>
-                    </a>
+                    </Link>
                 </div>
                 <div className={cx("footer__info")}>
                     <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
@@ -23,9 +23,9 @@ function Header() {
                 </div>
                 <div className={cx("footer__adress")}>
                     <h5>STORES</h5>
-                    <a href="">
+                    <Link to={"/"}>
                         <span>Dunsmuir Ave, Los Angeles, CA 90036, USA</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
             <div className={cx("footer__bottom")}>
@@ -57,25 +57,25 @@ function Header() {
                         <div className={cx("footer__social")}>
                             <ul>
                                 <li>
-                                    <a href="">
+                                    <Link to={"/"}>
                                         <span className="icon icon__instagram">
                                             <i className="fa-brands fa-instagram"></i>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <Link to={"/"}>
                                         <span className="icon icon__twitter">
                                             <i className="fab fa-twitter"></i>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <Link to={"/"}>
                                         <span className="icon icon__facebook">
                                             <i className="fa-brands fa-facebook-f"></i>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

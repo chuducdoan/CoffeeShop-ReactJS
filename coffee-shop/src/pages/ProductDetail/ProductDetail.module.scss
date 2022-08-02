@@ -94,9 +94,6 @@
         font-weight: 400;
         font-size: var(--fontSize14);
     }
-    .left__tags {
-        margin-left: 5px;
-    }
     .footer__social {
         margin-left: 12px;
     }
@@ -130,22 +127,26 @@
     text-align: center;
     &.active {
         background-color: var(--yellow);
-        a {
+        button {
             color: var(--white);
         }
     }
-    a {
+    button {
         padding: 15px 14px;
         font-size: var(--fontSize12);
         font-weight: 400;
         display: inline-block;
         text-transform: uppercase;
         letter-spacing: 1px;
+        background-color: inherit;
+        cursor: pointer;
+        outline: none;
+        border: none;
     }
     &:hover {
         background-color: var(--yellow);
         color: var(--white);
-        a {
+        button {
             color: var(--white);
         }
     }

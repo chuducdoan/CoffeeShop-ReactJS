@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -16,6 +15,9 @@ function ProductList() {
 
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const textResult = useRef(searchText);
+
     const categoriesRef = useRef(categories);
     const search = useLocation().search;
     const categoryId = new URLSearchParams(search).get('categoryId');
@@ -41,10 +43,25 @@ function ProductList() {
             const fetchProductsByCategory = async () => {
                 const response = await productApi.getProductsByCategory(categoryId);
                 setProducts(response);
+                textResult.current = '';
             }
             fetchProductsByCategory();
         }
     }, [categoryId]);
+
+    const handleSearch = () => {
+        const fecthProductSearch = async () => {
+            const params = {
+                name_like: searchText
+            }
+            categoryId && (params.categoryId = categoryId)
+            const response = await productApi.getAll(params);
+            setProducts(response);
+        }
+        fecthProductSearch();
+        textResult.current = `Result search by: ${searchText}`;
+        setSearchText('');
+    }
 
     return ( 
         <>
@@ -58,7 +75,7 @@ function ProductList() {
                             <div className={cx("left__item")}>
                                 <h5>FILTER BY PRICE</h5>
                                 <form action="" className={cx("left__form")}>
-                                    <input type="range"/>
+                                    <input type="range" />
                                     <div className={cx("left__form-group")}>
                                         <div>
                                             Price: <span>$12</span> — <span>$600</span>
@@ -79,68 +96,10 @@ function ProductList() {
                                     </ul>
                                 </div>
                             </div>
-                            {/* <div className={cx("left__item")}>
-                                <h5>PRODUCT TAGS</h5>
-                                <div className={cx("left__tags")}>
-                                    <a href="">Aloma</a>
-                                    <a href="">Beans</a>
-                                    <a href="">Black</a>
-                                    <a href="">Casual</a>
-                                    <a href="">Classic</a>
-                                    <a href="">Fresh</a>
-                                </div>
-                            </div>
-                            <div className={cx("left__item")}>
-                                <h5>TOP RATED PRODUCTS</h5>
-                                <div className={cx("left__product")}>
-                                    <div className={cx("left__product-item")}>
-                                        <a href="#" className={cx("image")}>
-                                            <img src="assets/images/product1.png" alt=""/>
-                                        </a>
-                                        <div className={cx("left__product-content")}>
-                                            <a href="">
-                                                <span>Columbia Coffee</span>
-                                            </a>
-                                            <div className={cx("rate")}>
-                                                *****
-                                            </div>
-                                            <span className={cx("price")}>$25.00</span>
-                                        </div>
-                                    </div>
-                                    <div className={cx("left__product-item")}>
-                                        <a href="" className={cx("image")}>
-                                            <img src="assets/images/product2.png" alt=""/>
-                                        </a>
-                                        <div className={cx("left__product-content")}>
-                                            <a href="">
-                                                <span>Columbia Coffee</span>
-                                            </a>
-                                            <div className={cx("rate")}>
-                                                *****
-                                            </div>
-                                            <span className={cx("price")}>$25.00</span>
-                                        </div>
-                                    </div>
-                                    <div className={cx("left__product-item")}>
-                                        <a href="" className={cx("image")}>
-                                            <img src="assets/images/product3.png" alt=""/>
-                                        </a>
-                                        <div className={cx("left__product-content")}>
-                                            <a href="">
-                                                <span>Columbia Coffee</span>
-                                            </a>
-                                            <div className={cx("rate")}>
-                                                *****
-                                            </div>
-                                            <span className={cx("price")}>$25.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
                             <div className={cx("left__item")}>
                                 <div className={cx("left__search")}>
-                                    <input type="text" placeholder="Search"/>
-                                    <button>
+                                    <input type="text" value={searchText} placeholder="Search" onChange={(e) => setSearchText(e.target.value)}/>
+                                    <button onClick={handleSearch}>
                                         <span className={`fa fa-search ${cx("icon__search")}`}></span>
                                     </button>
                                 </div>
@@ -150,6 +109,11 @@ function ProductList() {
                     <div className="col-xl-9">
                         <div className="product-list__right">
                             <div className="row">
+                                {textResult.current && (
+                                     <div className="col-12">
+                                        <p className={cx('message-search')}>{textResult.current}</p>
+                                     </div>
+                                )}
                                 {products.map((product, index) => (
                                     <div className="col-sm-6 col-md-4" key={index}>
                                         <ProductItem 

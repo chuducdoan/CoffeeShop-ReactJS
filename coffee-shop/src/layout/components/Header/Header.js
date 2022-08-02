@@ -15,6 +15,7 @@ const cx = classNames.bind(styles);
 
 function Header() {
     const user = useSelector(state => state.authRed.user);
+    const numberCart = useSelector(state => state.cartRed.numberCart);
     const dispatch = useDispatch();
 
     console.log(user)
@@ -70,17 +71,17 @@ function Header() {
                                 render={(attrs) => (
                                     <div {...attrs}>
                                         <Popper small>
-                                            <a onClick={handleLogout} className={cx('logout')}>
+                                            <p onClick={handleLogout} className={cx('logout')}>
                                                 <span>Log out</span>
-                                            </a>
+                                            </p>
                                         </Popper>
                                     </div>
                                 )}
                                 >
-                                    <li>
-                                        <a className={cx("username")}>
+                                    <li className={cx('wrap-username')}>
+                                        <button className={cx("username")}>
                                             <span>{user.displayName}</span>
-                                        </a>
+                                        </button>
                                     </li>
                                 </Tippy>
                             ) : (
@@ -110,13 +111,13 @@ function Header() {
                                 <ul>
                                     <li>
                                         <div className={cx("left__product-item")}>
-                                            <a href="" className={cx("image")}>
+                                            <Link to={"/"} className={cx("image")}>
                                                 <img src="assets/images/product3.png" alt=""/>
-                                            </a>
+                                            </Link>
                                             <div className={cx("left__product-content")}>
-                                                <a href="" className={cx('product__title')}>
+                                                <Link to={"/"} className={cx('product__title')}>
                                                     <span>Columbia Coffee</span>
-                                                </a>
+                                                </Link>
                                                 <div className={cx("quantity")}>
                                                     <span className={cx("quantity__lable")}>Quantity:</span><span>2</span>
                                                 </div>
@@ -129,13 +130,13 @@ function Header() {
                                     </li>
                                     <li>
                                         <div className={cx("left__product-item")}>
-                                            <a href="" className={cx("image")}>
+                                            <Link to={"/"} className={cx("image")}>
                                                 <img src="assets/images/product3.png" alt=""/>
-                                            </a>
+                                            </Link>
                                             <div className={cx("left__product-content")}>
-                                                <a href="" className={cx('product__title')}>
+                                                <Link to={"/"} className={cx('product__title')}>
                                                     <span>Columbia Coffee</span>
-                                                </a>
+                                                </Link>
                                                 <div className={cx("quantity")}>
                                                     <span className={cx("quantity__lable")}>Quantity:</span><span>2</span>
                                                 </div>
@@ -166,7 +167,7 @@ function Header() {
                             <span>
                                 <i className={cx("icon-cart")}></i>
                             </span>
-                            <span className={cx("header__cart-number")}>2</span>
+                            <span className={cx("header__cart-number")}>{numberCart}</span>
                         </div>
                     </Tippy>
                 </div>

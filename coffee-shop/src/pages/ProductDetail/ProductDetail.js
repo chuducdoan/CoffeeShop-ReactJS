@@ -1,15 +1,14 @@
-import classNames from "classnames/bind";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import classNames from "classnames/bind";
 
-import styles from './ProductDetail.module.scss';
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import productApi from "~/api/productApi";
 import Banner from "~/components/Banner";
 import Button from "~/components/Button";
 import ProductItem from "~/components/ProductItem";
 import config from "~/config";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { async } from "@firebase/util";
-import productApi from "~/api/productApi";
+import styles from './ProductDetail.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -91,35 +90,27 @@ function ProductDetail() {
                                 <div>
                                     <span className={cx("label")}>Category:</span>
                                     <span>
-                                        <a href="">Accessories</a>
+                                        <Link to={"/"}>Accessories</Link>
                                     </span>
-                                </div>
-                                <div className="d-flex">
-                                    <span className={cx("label")}>Tags:</span>
-                                    <div className={cx("left__tags")}>
-                                        <a href="">Aloma</a>
-                                        <a href="">Beans</a>
-                                        <a href="">Black</a>
-                                    </div>
                                 </div>
                                 <div  className={cx("d-flex")}>
                                     <span className={cx("label")}>Share:</span>
                                     <div className={cx("footer__social")}>
                                         <ul>
                                             <li>
-                                                <a href="">
+                                                <Link to={"/"}>
                                                     <i className={`fa-brands fa-instagram ${cx("icon")}`}></i>
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
-                                                <a href="">
+                                                <Link to={"/"}>
                                                     <i className={`fab fa-twitter ${cx("icon")}`}></i>
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
-                                                <a href="">
+                                                <Link to={"/"}>
                                                     <i className={`fa-brands fa-facebook-f ${cx("icon")}`}></i>
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -128,13 +119,13 @@ function ProductDetail() {
                             <div className={cx("product-detail__tablist")}>
                                 <ul>
                                     <li className={cx("product-detail__tab", "active")}>
-                                        <a href="#tab-1">Description</a>
+                                        <button>Description</button>
                                     </li>
                                     <li className={cx("product-detail__tab")}>
-                                        <a href="#tab-2">Additional information</a>
+                                        <button>Additional information</button>
                                     </li>
                                     <li className={cx("product-detail__tab")}>
-                                        <a href="#tab-3">Review(1)</a>
+                                        <button>Review(1)</button>
                                     </li>
                                 </ul>
                                 <div className={cx("product-detail__tabcontent")}>

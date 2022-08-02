@@ -7,9 +7,7 @@ const initState = {
     user: null,
     email: '',
     password: '',
-    fullName: '',
-    numberCart: 0,
-    Carts: []
+    fullName: ''
 }
 
 const authReducer = (state = initState, action) => {

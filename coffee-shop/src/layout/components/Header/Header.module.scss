@@ -221,9 +221,19 @@
     }
 }
 
+.wrap-username {
+    display: flex;
+    align-items: center;
+}
+
 .username {
+    text-transform: uppercase;
     cursor: pointer;
-    padding: 15px 34px 15px 10px !important;
+    padding: 10px;
+    background-color: inherit;
+    border: 1px solid var(--white);
+    color: var(--white);
+    margin-right: 15px;
 }
 
 .button__menu-bar {

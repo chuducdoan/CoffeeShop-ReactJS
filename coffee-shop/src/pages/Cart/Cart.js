@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import { Link } from "react-router-dom";
 import Banner from "~/components/Banner";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
@@ -44,7 +45,7 @@ function Cart() {
                                             image
                                         </td>
                                         <td>
-                                            <a href="">French Press</a>
+                                            <Link to={"/"}>French Press</Link>
                                         </td>
                                         <td>
                                             <span>
@@ -95,7 +96,7 @@ function Cart() {
                                     <th>Shipping</th>
                                     <td>
                                         <p>
-                                            <a href="">Calculate shipping</a>
+                                            <Link to={"/"}>Calculate shipping</Link>
                                         </p>
                                     </td>
                                 </tr>

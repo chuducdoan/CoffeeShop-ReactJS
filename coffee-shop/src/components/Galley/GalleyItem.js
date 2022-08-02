@@ -1,7 +1,6 @@
-import classNames from "classnames/bind";
-import { useMemo } from "react";
-import { Link } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import classNames from "classnames/bind";
+import { Link } from "react-router-dom";
 
 import styles from './Galley.module.scss';
 
