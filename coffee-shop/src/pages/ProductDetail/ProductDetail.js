@@ -22,7 +22,6 @@ function ProductDetail() {
         try {
             const fetchProductDetail = async () => {
                 const response = await productApi.get(productId);
-                console.log(response)
                 const params = {
                     id_ne: productId,
                     categoryId: response.categoryId

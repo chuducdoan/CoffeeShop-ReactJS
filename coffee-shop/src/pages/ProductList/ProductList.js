@@ -1,6 +1,6 @@
 import { async } from "@firebase/util";
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import categoryApi from "~/api/categoryApi";
 import productApi from "~/api/productApi";
@@ -16,6 +16,7 @@ function ProductList() {
 
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const categoriesRef = useRef(categories);
     const search = useLocation().search;
     const categoryId = new URLSearchParams(search).get('categoryId');
 
@@ -24,13 +25,14 @@ function ProductList() {
             const fetchProducts = async () => {
                 const params = {
                     _page: 1,
-                    _limit: 5
+                    _limit: 10
                 }
                 const response = await productApi.getAll(params);
                 setProducts(response.data);
             }
             const fetcgCategories = async () => {
                 const response = await categoryApi.getAll();
+                categoriesRef.current = response;
                 setCategories(response);
             }
             fetchProducts();
@@ -38,7 +40,6 @@ function ProductList() {
         } else {
             const fetchProductsByCategory = async () => {
                 const response = await productApi.getProductsByCategory(categoryId);
-                console.log('Product by category: ', response)
                 setProducts(response);
             }
             fetchProductsByCategory();
@@ -70,7 +71,7 @@ function ProductList() {
                                 <h5>PRODUCT CATEGORIES</h5>
                                 <div className={cx("contact-item")}>
                                     <ul>
-                                        {categories.map((category, index) => (
+                                        {categoriesRef.current.map((category, index) => (
                                             <li key={index}>
                                                 <Link to={`${config.routes.productList}?categoryId=${category.id}`}>{category.name}</Link>
                                             </li>
