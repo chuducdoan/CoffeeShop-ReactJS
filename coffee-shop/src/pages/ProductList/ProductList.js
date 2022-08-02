@@ -1,5 +1,9 @@
+import { async } from "@firebase/util";
 import classNames from "classnames/bind";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import categoryApi from "~/api/categoryApi";
+import productApi from "~/api/productApi";
 import Banner from "~/components/Banner";
 import Button from "~/components/Button";
 import ProductItem from "~/components/ProductItem";
@@ -10,9 +14,36 @@ const cx = classNames.bind(style);
 
 function ProductList() {
 
-    useEffect(() => {
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const search = useLocation().search;
+    const categoryId = new URLSearchParams(search).get('categoryId');
 
-    }, []);
+    useEffect(() => {
+        if (categoryId === null) {
+            const fetchProducts = async () => {
+                const params = {
+                    _page: 1,
+                    _limit: 5
+                }
+                const response = await productApi.getAll(params);
+                setProducts(response.data);
+            }
+            const fetcgCategories = async () => {
+                const response = await categoryApi.getAll();
+                setCategories(response);
+            }
+            fetchProducts();
+            fetcgCategories();
+        } else {
+            const fetchProductsByCategory = async () => {
+                const response = await productApi.getProductsByCategory(categoryId);
+                console.log('Product by category: ', response)
+                setProducts(response);
+            }
+            fetchProductsByCategory();
+        }
+    }, [categoryId]);
 
     return ( 
         <>
@@ -39,15 +70,15 @@ function ProductList() {
                                 <h5>PRODUCT CATEGORIES</h5>
                                 <div className={cx("contact-item")}>
                                     <ul>
-                                        <li><a href="">Accessories</a></li>
-                                        <li><a href="">Bean Varieties</a></li>
-                                        <li><a href="">Coffee Cups</a></li>
-                                        <li><a href="">Espresso Machines</a></li>
-                                        <li><a href="">Fresh Coffee</a></li>
+                                        {categories.map((category, index) => (
+                                            <li key={index}>
+                                                <Link to={`${config.routes.productList}?categoryId=${category.id}`}>{category.name}</Link>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
                             </div>
-                            <div className={cx("left__item")}>
+                            {/* <div className={cx("left__item")}>
                                 <h5>PRODUCT TAGS</h5>
                                 <div className={cx("left__tags")}>
                                     <a href="">Aloma</a>
@@ -104,9 +135,8 @@ function ProductList() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className={cx("left__item")}>
-                                <h5>TOP RATED PRODUCTS</h5>
                                 <div className={cx("left__search")}>
                                     <input type="text" placeholder="Search"/>
                                     <button>
@@ -119,70 +149,14 @@ function ProductList() {
                     <div className="col-xl-9">
                         <div className="product-list__right">
                             <div className="row">
-                                <div className="col-sm-6 col-md-4">
-                                    <ProductItem 
-                                    to={config.routes.productDetail}
-                                    image="assets/images/product2.png"
-                                    tittle="Ethiopia Coffee"
-                                    price="15.00"
-                                    />
-                                </div>
-                                <div className="col-sm-6 col-md-4">
-                                    <ProductItem 
-                                    to={config.routes.productDetail}
-                                    image="assets/images/product2.png"
-                                    tittle="Ethiopia Coffee"
-                                    price="15.00"
-                                    />
-                                </div>
-                                <div className="col-sm-6 col-md-4">
-                                    <ProductItem 
-                                    to={config.routes.productDetail}
-                                    image="assets/images/product2.png"
-                                    tittle="Ethiopia Coffee"
-                                    price="15.00"
-                                    />
-                                </div>
-                                <div className="col-sm-6 col-md-4">
-                                    <ProductItem 
-                                    to={config.routes.productDetail}
-                                    image="assets/images/product2.png"
-                                    tittle="Ethiopia Coffee"
-                                    price="15.00"
-                                    />
-                                </div>
-                                <div className="col-sm-6 col-md-4">
-                                    <ProductItem 
-                                    to={config.routes.productDetail}
-                                    image="assets/images/product2.png"
-                                    tittle="Ethiopia Coffee"
-                                    price="15.00"
-                                    />
-                                </div>
-                                <div className="col-sm-6 col-md-4">
-                                    <ProductItem 
-                                    to={config.routes.productDetail}
-                                    image="assets/images/product2.png"
-                                    tittle="Ethiopia Coffee"
-                                    price="15.00"
-                                    />
-                                </div>
-                                <div className="col-sm-6 col-md-4">
-                                    <ProductItem 
-                                    to={config.routes.productDetail}
-                                    image="assets/images/product2.png"
-                                    tittle="Ethiopia Coffee"
-                                    price="15.00"
-                                    />
-                                </div>
-                                <div className="col-sm-6 col-md-4">
-                                    <ProductItem 
-                                    to={config.routes.productDetail}
-                                    image="assets/images/product2.png"
-                                    tittle="Ethiopia Coffee"
-                                    price="15.00"
-                                    />
-                                </div>
+                                {products.map((product, index) => (
+                                    <div className="col-sm-6 col-md-4" key={index}>
+                                        <ProductItem 
+                                        to={`${config.routes.productDetail}/${product.id}`}
+                                        product={product}
+                                        />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

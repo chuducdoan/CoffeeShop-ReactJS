@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 
 import blogApi from "~/api/blogApi";
+import productApi from "~/api/productApi";
 import Banner from "~/components/Banner";
 import BlogItem from "~/components/BlogItem";
 import BoxItem from "~/components/BoxItem";
@@ -49,6 +50,7 @@ const galleys = [
 
 function Home() {
     const [blogs, setBlogs] = useState([]);
+    const [productNews, setProductNews] = useState([]);
 
     useEffect(() => {
         try {
@@ -61,7 +63,18 @@ function Home() {
                 const response = await blogApi.getAll(params);
                 setBlogs(response.data);
             }
+            const fetchProductNews = async () => {
+                const params = {
+                    _sort: 'createAt',
+                    _order: 'desc',
+                    _limit: 4
+                }
+                const response = await productApi.getAll(params);
+                console.log(response.data)
+                setProductNews(response.data);
+            }
             fetchBlogList();
+            fetchProductNews();
         } catch(error) {
             console.log(error)
         }
@@ -140,38 +153,14 @@ function Home() {
                     />
                     <div className="grid">
                         <div className="row">
-                            <div className="col-sm-6 col-md-3 col-lg-3">
-                                <ProductItem
-                                image="assets/images/product1.png"
-                                tittle="Ethiopia Coffee"
-                                price="15.00"
-                                to={config.routes.productDetail}
-                                />
-                            </div>
-                            <div className="col-sm-6 col-md-3 col-lg-3">
-                                <ProductItem
-                                image="assets/images/product2.png"
-                                tittle="Ethiopia Coffee"
-                                price="15.00"
-                                to={config.routes.productDetail}
-                                />
-                            </div>
-                            <div className="col-sm-6 col-md-3 col-lg-3">
-                                <ProductItem
-                                image="assets/images/product3.png"
-                                tittle="Ethiopia Coffee"
-                                price="15.00"
-                                to={config.routes.productDetail}
-                                />
-                            </div>
-                            <div className="col-sm-6 col-md-3 col-lg-3">
-                                <ProductItem
-                                image="assets/images/product4.png"
-                                tittle="Ethiopia Coffee"
-                                price="15.00"
-                                to={config.routes.productDetail}
-                                />
-                            </div>
+                            {productNews.map((product, index) => (
+                                <div className="col-sm-6 col-md-3 col-lg-3" key={index}>
+                                    <ProductItem
+                                    to={`${config.routes.productDetail}/${product.id}`}
+                                    product={product}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

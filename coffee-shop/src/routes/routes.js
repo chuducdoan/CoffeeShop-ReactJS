@@ -15,7 +15,7 @@ const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.about, component: About },
     { path: config.routes.contact, component: Contact },
-    { path: config.routes.productDetail + ':productId', component: ProductDetail },
+    { path: config.routes.productDetail + '/:productId', component: ProductDetail },
     { path: config.routes.productList, component: ProductList },
     { path: config.routes.blogDetail + '/:blogId', component: BlogDetail },
     { path: config.routes.login, component: Login, layout: LoginLayout },

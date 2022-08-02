@@ -6,10 +6,37 @@ import Banner from "~/components/Banner";
 import Button from "~/components/Button";
 import ProductItem from "~/components/ProductItem";
 import config from "~/config";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { async } from "@firebase/util";
+import productApi from "~/api/productApi";
 
 const cx = classNames.bind(styles);
 
 function ProductDetail() {
+    const {productId} = useParams();
+    const [relatedProducts, setRelatedProducts] = useState([]);
+    const [productDetail, setProductDetail] = useState({});
+
+    useEffect(() => {
+        try {
+            const fetchProductDetail = async () => {
+                const response = await productApi.get(productId);
+                console.log(response)
+                const params = {
+                    id_ne: productId,
+                    categoryId: response.categoryId
+                }
+                const res = await productApi.getAll(params);
+                setProductDetail(response);
+                setRelatedProducts(res)
+            }
+            fetchProductDetail();
+        } catch(error) {
+            console.log(error);
+        }
+    }, [productId]);
+
     return ( 
         <div>
             <Banner productList>
@@ -20,7 +47,7 @@ function ProductDetail() {
                     <div className="col-xl-6">
                         <div className={cx("product-detail__left")}>
                             <div className={cx("product-detail__image")}>
-                                <img src="assets/images/product-detail.jpg" alt=""/>
+                                <img src={productDetail.thumnailUrl} alt={productDetail.name}/>
                             </div>
                             <div className={cx("product-detail__image")}>
                                 <img src="assets/images/product-detail-4.jpg" alt=""/>
@@ -35,16 +62,18 @@ function ProductDetail() {
                     </div>
                     <div className="col-xl-6">
                         <div className={cx("product-detail__right")}>
-                            <h3 className={cx("product-detail__title")}>French Press</h3>
+                            <h3 className={cx("product-detail__title")}>{productDetail.name}</h3>
                             <p className={cx("product-detail__price")}>
                                 <span>
-                                    <span>$</span>23.00
+                                    <span>$</span><span>{productDetail.price}</span>
                                 </span>
                             </p>
                             <div className={cx("product-detail__rating")}>
                                 <span>start</span>
                             </div>
-                            <p className={cx("product-detail__description")}>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                            <p className={cx("product-detail__description")}>
+                                {productDetail.description}
+                            </p>
                             <div className={cx("product-detail__cart")}>
                                 <div className={cx("product-detail__group-form")}>
                                     <input type="text" value="1"/>
@@ -132,38 +161,14 @@ function ProductDetail() {
                         <div className="col-12">
                             <h2>RELATED PRODUCTS</h2>
                         </div>
-                        <div className="col-sm-6 col-md-4 col-xl-3">
-                            <ProductItem
-                                image="assets/images/product2.png"
-                                tittle="Ethiopia Coffee"
-                                price="15.00"
-                                to={config.routes.productDetail}
-                                />
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-xl-3">
-                            <ProductItem
-                                image="assets/images/product2.png"
-                                tittle="Ethiopia Coffee"
-                                price="15.00"
-                                to={config.routes.productDetail}
-                                />
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-xl-3">
-                            <ProductItem
-                                image="assets/images/product2.png"
-                                tittle="Ethiopia Coffee"
-                                price="15.00"
-                                to={config.routes.productDetail}
-                                />
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-xl-3">
-                            <ProductItem
-                                image="assets/images/product2.png"
-                                tittle="Ethiopia Coffee"
-                                price="15.00"
-                                to={config.routes.productDetail}
-                                />
-                        </div>
+                        {relatedProducts && relatedProducts.map((product, index) => (
+                            <div className="col-sm-6 col-md-4 col-xl-3" key={index}>
+                                <ProductItem
+                                    to={`${config.routes.productDetail}/${product.id}`}
+                                    product={product}
+                                    />
+                            </div>
+                        ))}
                     </div>
                </div>
             </section>

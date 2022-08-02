@@ -31,6 +31,15 @@
         font-size: 20px;
         margin-bottom: 19px;
     }
+    ul {
+        li {
+            a {
+                &:hover {
+                    color: var(--yellow);
+                }
+            }
+        }
+    }
 }
 
 .left__form {
