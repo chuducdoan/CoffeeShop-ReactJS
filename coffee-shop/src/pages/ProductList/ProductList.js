@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { addCart } from "~/action";
 import categoryApi from "~/api/categoryApi";
 import productApi from "~/api/productApi";
@@ -10,6 +10,8 @@ import Button from "~/components/Button";
 import ProductItem from "~/components/ProductItem";
 import config from "~/config";
 import style from './ProductList.module.scss';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(style);
 
@@ -20,6 +22,8 @@ function ProductList() {
     const [searchText, setSearchText] = useState('');
     const textResult = useRef(searchText);
     const dispatch = useDispatch();
+    const user = useSelector(state => state.authRed.user);
+    const navigate = useNavigate();
 
     const categoriesRef = useRef(categories);
     const search = useLocation().search;
@@ -67,7 +71,11 @@ function ProductList() {
     }
 
     const handleAddToCart = (product) => {
-       dispatch(addCart(product));
+        if (!user || user === null) {
+            navigate(config.routes.login);
+            return;
+        }
+        dispatch(addCart(product));
     }
 
     return ( 
@@ -116,6 +124,7 @@ function ProductList() {
                     <div className="col-xl-9">
                         <div className="product-list__right">
                             <div className="row">
+                                <ToastContainer/>
                                 {textResult.current && (
                                      <div className="col-12">
                                         <p className={cx('message-search')}>{textResult.current}</p>

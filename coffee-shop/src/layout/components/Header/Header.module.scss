@@ -233,7 +233,7 @@
     background-color: inherit;
     border: 1px solid var(--white);
     color: var(--white);
-    margin-right: 15px;
+    margin: 0 44px 0 22px;
 }
 
 .button__menu-bar {
@@ -257,6 +257,13 @@
             }
         }
     }
+}
+
+.empty-cart {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: var(--fontSize18);
 }
 
 @media only screen and (max-width: 1024px) {

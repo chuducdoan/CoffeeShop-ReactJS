@@ -1,5 +1,8 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart } from "~/action";
+import { useNavigate} from 'react-router-dom';
 
 import blogApi from "~/api/blogApi";
 import productApi from "~/api/productApi";
@@ -49,8 +52,11 @@ const galleys = [
 ]
 
 function Home() {
+    const user = useSelector(state => state.authRed.user);
     const [blogs, setBlogs] = useState([]);
     const [productNews, setProductNews] = useState([]);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         try {
@@ -79,6 +85,13 @@ function Home() {
             console.log(error)
         }
     }, []);
+
+    const handleAddToCart = (product) => {
+        if (!user || user === null) {
+            navigate(config.routes.login);
+        }
+        dispatch(addCart(product));
+     }
 
     return ( 
         <div>
@@ -158,6 +171,7 @@ function Home() {
                                     <ProductItem
                                     to={`${config.routes.productDetail}/${product.id}`}
                                     product={product}
+                                    handleOnClick={() => handleAddToCart(product)}
                                     />
                                 </div>
                             ))}

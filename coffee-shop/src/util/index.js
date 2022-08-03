@@ -24,4 +24,8 @@ const formatDate = (dateNumber) => {
     return moment(new Date(dateNumber)).format('DD/MM/YYYY');
 }
 
-export {validateRequired, validateLength, validateEmailFormat, formatDate};
+const getTotalCart = (carts) => {
+    return carts.reduce((sum, {quantity, price}) => sum + quantity*price, 0);
+}
+
+export {validateRequired, validateLength, validateEmailFormat, formatDate, getTotalCart};

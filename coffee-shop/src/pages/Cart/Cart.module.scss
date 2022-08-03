@@ -18,14 +18,7 @@
 .cart-content {
     tbody {
         td {
-            padding: 25px 0;
-        }
-    }
-    table {
-        tbody {
-            tr:last-child {
-                border-bottom: none;
-            }
+            padding: 6px 0;
         }
     }
 }
@@ -127,5 +120,18 @@
     cursor: pointer;
     &:hover {
         color: var(--yellow);
+    }
+}
+
+.empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+        width: 190px;
+    }
+    p {
+        text-align: center;
+        margin: 15px 0px 30px;
     }
 }

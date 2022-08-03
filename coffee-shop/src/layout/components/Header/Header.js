@@ -9,6 +9,7 @@ import { logout, removeCart, setEmail, setPassword } from '~/action';
 import Button from '~/components/Button';
 import Popper from '~/components/Popper';
 import config from '~/config';
+import { getTotalCart } from '~/util';
 import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
@@ -58,11 +59,6 @@ function Header() {
                             <li>
                                 <NavLink className={(nav) => cx({active: nav.isActive})} to={config.routes.contact}>
                                     <span>Contact</span>
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink className={(nav) => cx({active: nav.isActive})} to={config.routes.cart}>
-                                    <span>Cart</span>
                                 </NavLink>
                             </li>
                             {user ? (
@@ -138,7 +134,7 @@ function Header() {
                                             <div className={cx("cart__subtotal")}>
                                                 <span className="eltdf-total">TOTAL:</span>
                                                 <span className="eltdf-total-amount">
-                                                    <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>64.00</span>
+                                                    <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>{getTotalCart(carts)}</span>
                                                 </span>
                                             </div>
                                             <div>
@@ -148,7 +144,8 @@ function Header() {
                                     </ul>
                                 ) : (
                                     <div>
-                                        <p>Cart empty!</p>
+                                        <p className={cx('empty-cart')}>Cart empty!</p>
+                                        <Button to={config.routes.productList} buttonText secondary small fullWidth>Continue shopping</Button>
                                     </div>
                                 )}
                                 
