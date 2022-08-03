@@ -77,8 +77,6 @@ function ProductList() {
         }
     }, [categoryId, filter]);
 
-    console.log(textResult)
-
     const handleSearch = () => {
         setFilter(state => {
             if (categoryId) {

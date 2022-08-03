@@ -35,6 +35,14 @@ function ProductDetail() {
         }
     }, [productId]);
 
+    const handleAddToCart = (product) => {
+        if (!user || user === null) {
+            navigate(config.routes.login);
+            return;
+        }
+        dispatch(addCart(product));
+     }
+
     return ( 
         <div>
             <Banner productList>
@@ -156,6 +164,7 @@ function ProductDetail() {
                                 <ProductItem
                                     to={`${config.routes.productDetail}/${product.id}`}
                                     product={product}
+                                    handleOnClick={() => handleAddToCart(product)}
                                     />
                             </div>
                         ))}

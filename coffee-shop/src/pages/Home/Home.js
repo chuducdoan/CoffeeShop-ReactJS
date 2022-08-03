@@ -89,6 +89,7 @@ function Home() {
     const handleAddToCart = (product) => {
         if (!user || user === null) {
             navigate(config.routes.login);
+            return;
         }
         dispatch(addCart(product));
      }
