@@ -1,0 +1,22 @@
+.wrapper__pagination {
+    padding-right: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    button {
+        background-color: inherit;
+        border: none;
+        font-size: var(--fontSize16);
+        cursor: pointer;
+        &:hover {
+            color: var(--yellow);
+        }
+        &+button {
+            margin-left: 5px;
+        }
+        &.active {
+            color: var(--yellow);
+            font-weight: 500;
+        }
+    }
+}

@@ -2,27 +2,38 @@ import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { addCart } from "~/action";
 import categoryApi from "~/api/categoryApi";
 import productApi from "~/api/productApi";
 import Banner from "~/components/Banner";
 import Button from "~/components/Button";
+import Pagination from "~/components/Pagination";
 import ProductItem from "~/components/ProductItem";
 import config from "~/config";
 import style from './ProductList.module.scss';
-import {ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(style);
 
 function ProductList() {
 
+    const user = useSelector(state => state.authRed.user);
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const [pagination, setPagination] = useState({
+        _page: 1,
+        _limit: 10,
+        _totalRows: 1
+    })
+    const [filter, setFilter] = useState({
+        _page: 1,
+        _limit: 10
+    })
+
     const textResult = useRef(searchText);
     const dispatch = useDispatch();
-    const user = useSelector(state => state.authRed.user);
     const navigate = useNavigate();
 
     const categoriesRef = useRef(categories);
@@ -32,42 +43,50 @@ function ProductList() {
     useEffect(() => {
         if (categoryId === null) {
             const fetchProducts = async () => {
-                const params = {
-                    _page: 1,
-                    _limit: 10
-                }
+                const params = filter;
                 const response = await productApi.getAll(params);
                 setProducts(response.data);
-            }
-            const fetcgCategories = async () => {
-                const response = await categoryApi.getAll();
-                categoriesRef.current = response;
-                setCategories(response);
+                setPagination(response.pagination);
             }
             fetchProducts();
-            fetcgCategories();
         } else {
             const fetchProductsByCategory = async () => {
-                const response = await productApi.getProductsByCategory(categoryId);
-                setProducts(response);
-                textResult.current = '';
+                const params = filter;
+                const response = await productApi.getProductsByCategory(categoryId, params);
+                setProducts(response.data);
+                setPagination(response.pagination);
             }
             fetchProductsByCategory();
         }
-    }, [categoryId]);
+        const fetcgCategories = async () => {
+            const response = await categoryApi.getAll();
+            categoriesRef.current = response;
+            setCategories(response);
+        }
+        fetcgCategories();
+        if (searchText && searchText.length > 0) {
+            const fecthProductSearch = async () => {
+                const params = filter;
+                const response = await productApi.getAll(params);
+                setProducts(response.data);
+                setPagination(response.pagination);
+            }
+            fecthProductSearch();
+            textResult.current = `Result search by: ${searchText}`;
+            setSearchText('');
+        }
+    }, [categoryId, filter]);
+
+    console.log(textResult)
 
     const handleSearch = () => {
-        const fecthProductSearch = async () => {
-            const params = {
-                name_like: searchText
+        setFilter(state => {
+            if (categoryId) {
+                return {...state, name_like: searchText, categoryId: categoryId}
+            } else {
+                return {...state, name_like: searchText}
             }
-            categoryId && (params.categoryId = categoryId)
-            const response = await productApi.getAll(params);
-            setProducts(response);
-        }
-        fecthProductSearch();
-        textResult.current = `Result search by: ${searchText}`;
-        setSearchText('');
+        })
     }
 
     const handleAddToCart = (product) => {
@@ -76,6 +95,18 @@ function ProductList() {
             return;
         }
         dispatch(addCart(product));
+    }
+
+    const handlePageChange = (newPage) => {
+        setFilter(state => ({...state, _page: newPage}));
+    }
+
+    const handleClickPage = () => {
+        setFilter({
+            _page: 1,
+            _limit: 10
+        });
+        textResult.current = '';
     }
 
     return ( 
@@ -105,7 +136,7 @@ function ProductList() {
                                     <ul>
                                         {categoriesRef.current.map((category, index) => (
                                             <li key={index}>
-                                                <Link to={`${config.routes.productList}?categoryId=${category.id}`}>{category.name}</Link>
+                                                <Link to={`${config.routes.productList}?categoryId=${category.id}`} onClick={handleClickPage}>{category.name}</Link>
                                             </li>
                                         ))}
                                     </ul>
@@ -140,6 +171,9 @@ function ProductList() {
                                     </div>
                                 ))}
                             </div>
+                        </div>
+                        <div>
+                            <Pagination pagination={pagination} onPageChange={handlePageChange}/>
                         </div>
                     </div>
                 </div>
