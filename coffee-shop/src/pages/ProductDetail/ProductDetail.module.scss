@@ -65,19 +65,22 @@
 .product-detail__quantity {
     border: 1px solid var(--gray6);
     border-left: none;
-    span {
+    button {
         display: block;
         cursor: pointer;
         text-align: center;
         padding: 0 5px;
         font-size: 18px;
         transition: color .3s ease;
+        background-color: inherit;
+        border: none;
+        width: 100%;
+        height: 50%;
         &:hover {
             color: var(--yellow);
         }
     }
     .add {
-        height: 50%;
         border-bottom: none;
         border-bottom: 1px solid var(--gray6);
     }

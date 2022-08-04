@@ -11,6 +11,7 @@ import Button from "~/components/Button";
 import ProductItem from "~/components/ProductItem";
 import config from "~/config";
 import styles from './ProductDetail.module.scss';
+import {ToastContainer} from 'react-toastify';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,7 @@ function ProductDetail() {
     const {productId} = useParams();
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [productDetail, setProductDetail] = useState({});
+    const [numberProduct, setNumberProduct] = useState(1);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -46,7 +48,21 @@ function ProductDetail() {
             return;
         }
         dispatch(addCart(product));
-     }
+    }
+
+    const handleIncreaseProduct = () => {
+        setNumberProduct(state => state + 1);
+    }
+
+    const handleDecreaseProduct = () => {
+        if (numberProduct <= 1) return;
+        setNumberProduct(state => state - 1);
+    }
+
+    const handleAddToCartByProductDetail = () => {
+        dispatch(addCart({...productDetail, qty: numberProduct}));
+        setNumberProduct(1);
+    }
 
     return ( 
         <div>
@@ -55,6 +71,7 @@ function ProductDetail() {
             </Banner>
             <section className={cx("product-detail")}>
                 <div className="grid row">
+                    <ToastContainer/>
                     <div className="col-xl-6">
                         <div className={cx("product-detail__left")}>
                             <div className={cx("product-detail__image")}>
@@ -87,13 +104,13 @@ function ProductDetail() {
                             </p>
                             <div className={cx("product-detail__cart")}>
                                 <div className={cx("product-detail__group-form")}>
-                                    <input type="text" value="1"/>
+                                    <input type="text" value={numberProduct} readOnly/>
                                     <div className={cx("product-detail__quantity")}>
-                                        <span className={cx("add")}>+</span>
-                                        <span className={cx("sup")}>-</span>
+                                        <button className={cx("add")} onClick={handleIncreaseProduct}>+</button>
+                                        <button className={cx("sup")} onClick={handleDecreaseProduct}>-</button>
                                     </div>
                                 </div>
-                                <Button buttonText secondary>Add To Cart</Button>
+                                <Button buttonText secondary handleOnClick={handleAddToCartByProductDetail}>Add To Cart</Button>
                             </div>
                             <div className={cx("product-detail__meta")}>
                                 <div>

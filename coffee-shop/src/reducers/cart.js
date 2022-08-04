@@ -10,13 +10,14 @@ const initState = {
 const cartReducer = (state = initState, action) => {
     switch(action.type) {
         case ADD_CART: 
+            const numberProduct = action.payload.qty ? action.payload.qty : 1;
             if (state.numberCart === 0) {
                 const cart = {
                     id: action.payload.id,
                     name: action.payload.name,
                     image: action.payload.thumnailUrl,
                     price: action.payload.price,
-                    quantity: 1
+                    quantity: numberProduct
                 };
                 state.Carts.push(cart);
                 toast.success(`${action.payload.name} add to cart`, {
@@ -27,7 +28,7 @@ const cartReducer = (state = initState, action) => {
                 let isExistCartItem = false;
                 state.Carts.forEach((cart, index) => {
                     if (cart.id === action.payload.id) {
-                        state.Carts[index].quantity += 1;
+                        state.Carts[index].quantity += numberProduct;
                         isExistCartItem = true;
                         toast.info(`increased ${action.payload.name} cart quantity`, {
                             position: "bottom-left",
@@ -41,7 +42,7 @@ const cartReducer = (state = initState, action) => {
                         name: action.payload.name,
                         image: action.payload.thumnailUrl,
                         price: action.payload.price,
-                        quantity: 1
+                        quantity: numberProduct
                     };
                     state.Carts.push(_cart);
                     toast.success(`${action.payload.name} add to cart`, {
@@ -51,7 +52,7 @@ const cartReducer = (state = initState, action) => {
                 }
             }
 
-            state.numberCart += 1;
+            state.numberCart += numberProduct;
 
             localStorage.setItem("cartItems", JSON.stringify(state.Carts));
             localStorage.setItem("numberCart", JSON.stringify(state.numberCart));
