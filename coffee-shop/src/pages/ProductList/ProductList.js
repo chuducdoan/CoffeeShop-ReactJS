@@ -63,6 +63,8 @@ function ProductList() {
             setCategories(response);
         }
         fetcgCategories();
+        setError(false);
+        setErrorSearch(false);
     }, [categoryId, filter]);
 
     const handleSearch = () => {
@@ -122,6 +124,7 @@ function ProductList() {
     const handleOnFilter = () => {
         if (fromPrice === '' || toPrice === '') {
             setError(true);
+            return;
         } else {
             setFilter(state => ({...state, price_gte: fromPrice, price_lte: toPrice}));
             setError(false);
