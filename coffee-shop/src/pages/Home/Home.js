@@ -1,8 +1,8 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { addCart } from "~/action";
-import { useNavigate} from 'react-router-dom';
 
 import blogApi from "~/api/blogApi";
 import productApi from "~/api/productApi";
@@ -76,7 +76,6 @@ function Home() {
                     _limit: 4
                 }
                 const response = await productApi.getAll(params);
-                console.log(response.data)
                 setProductNews(response.data);
             }
             fetchBlogList();

@@ -8,7 +8,7 @@ import { privateRoutes, publicRoutes } from './routes';
 
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
-import { setUser } from './action';
+import { logout, setUser } from './action';
 import './App.css';
 import { auth } from './firebase';
 import RequireAuth from './routes/ProtectedRoute';
@@ -20,6 +20,9 @@ function App() {
   useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             dispatch(setUser(currentUser));
+            setTimeout(() => {
+              dispatch(logout());
+            }, Math.abs(Date.now() - currentUser.stsTokenManager.expirationTime));
         });
         return () => {
             unsubscribe();

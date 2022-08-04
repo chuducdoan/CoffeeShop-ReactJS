@@ -9,11 +9,9 @@ const cx = classNames.bind(styles);
 function Pagination({pagination, onPageChange}) {
     const {_limit, _page, _totalRows} = pagination;
     const totalPage = Math.ceil(_totalRows/_limit);
-    console.log(pagination)
     const [pages, setPages] = useState(() => {
         return Array.from({length: totalPage}, (v, k) => k + 1);
     });
-    console.log(pages)
     // 51/10 = 5.1 -> ceil lam tron len la 6
 
     const handlePageChange = (newPage) => {
