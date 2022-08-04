@@ -9,6 +9,7 @@ import categoryApi from "~/api/categoryApi";
 import productApi from "~/api/productApi";
 import Banner from "~/components/Banner";
 import Button from "~/components/Button";
+import Input from "~/components/Input";
 import Pagination from "~/components/Pagination";
 import ProductItem from "~/components/ProductItem";
 import config from "~/config";
@@ -31,6 +32,10 @@ function ProductList() {
         _page: 1,
         _limit: 10
     })
+    const [fromPrice, setFromPrice] = useState('');
+    const [toPrice, setToPrice] = useState('');
+    const [error, setError] = useState(false);
+    const [errorSearch, setErrorSearch] = useState(false);
 
     const textResult = useRef(searchText);
     const dispatch = useDispatch();
@@ -41,50 +46,34 @@ function ProductList() {
     const categoryId = new URLSearchParams(search).get('categoryId');
 
     useEffect(() => {
-        if (categoryId === null) {
-            const fetchProducts = async () => {
-                const params = filter;
-                const response = await productApi.getAll(params);
-                setProducts(response.data);
-                setPagination(response.pagination);
-            }
-            fetchProducts();
-        } else {
-            const fetchProductsByCategory = async () => {
-                const params = filter;
-                const response = await productApi.getProductsByCategory(categoryId, params);
-                setProducts(response.data);
-                setPagination(response.pagination);
-            }
-            fetchProductsByCategory();
+        let params = filter;
+        if (categoryId !== null) {
+            params = {...params, categoryId: categoryId}
         }
+        const fetchProducts = async () => {
+            const response = await productApi.getAll(params);
+            setProducts(response.data);
+            setPagination(response.pagination);
+        }
+        fetchProducts();
+
         const fetcgCategories = async () => {
             const response = await categoryApi.getAll();
             categoriesRef.current = response;
             setCategories(response);
         }
         fetcgCategories();
-        if (searchText && searchText.length > 0) {
-            const fecthProductSearch = async () => {
-                const params = filter;
-                const response = await productApi.getAll(params);
-                setProducts(response.data);
-                setPagination(response.pagination);
-            }
-            fecthProductSearch();
-            textResult.current = `Result search by: ${searchText}`;
-            setSearchText('');
-        }
     }, [categoryId, filter]);
 
     const handleSearch = () => {
-        setFilter(state => {
-            if (categoryId) {
-                return {...state, name_like: searchText, categoryId: categoryId}
-            } else {
-                return {...state, name_like: searchText}
-            }
-        })
+        if (searchText === '') {
+            setErrorSearch(true);
+        } else {
+            textResult.current = `Result search by: ${searchText}`;
+            setFilter(state => ({...state, name_like: searchText}));
+            setErrorSearch(false);
+            setSearchText('');
+        }
     }
 
     const handleAddToCart = (product) => {
@@ -107,6 +96,38 @@ function ProductList() {
         textResult.current = '';
     }
 
+    const handleChangeFromPrice = (e) => {
+        const fromPriceProduct = Number.parseInt(e.target.value);
+        if (isNaN(fromPriceProduct)) {
+            if (e.target.value.length === 0 || e.target.value === '') {
+                setFromPrice(e.target.value);
+            }
+            return;
+        }
+        console.log(fromPrice)
+        setFromPrice(fromPriceProduct);
+    }
+
+    const handleChangeToPrice = (e) => {
+        const fromToProduct = Number.parseInt(e.target.value);
+        if (isNaN(fromToProduct)) {
+            if (e.target.value.length === 0 || e.target.value === '') {
+                setToPrice(e.target.value);
+            }
+            return;
+        }
+        setToPrice(fromToProduct);
+    }
+
+    const handleOnFilter = () => {
+        if (fromPrice === '' || toPrice === '') {
+            setError(true);
+        } else {
+            setFilter(state => ({...state, price_gte: fromPrice, price_lte: toPrice}));
+            setError(false);
+        }
+    }
+
     return ( 
         <>
             <Banner title="Product List" productList>
@@ -118,15 +139,24 @@ function ProductList() {
                         <div className={cx("product-list__left")}>
                             <div className={cx("left__item")}>
                                 <h5>FILTER BY PRICE</h5>
-                                <form action="" className={cx("left__form")}>
-                                    <input type="range" />
+                                <div className={cx("left__form")}>
+                                    <div>
+                                        <div className={cx('filter-price')}>
+                                            <Input placeholder="$ from" value={fromPrice} onChange={(e) => handleChangeFromPrice(e)}/>
+                                            <span className={cx('filter__line')}></span>
+                                            <Input placeholder="$ to" value={toPrice} onChange={(e) => handleChangeToPrice(e)}/>
+                                        </div>
+                                        <div>
+                                            {error && (<p className="message__error">Please enter the appropriate price range</p>)}
+                                        </div>
+                                    </div>
                                     <div className={cx("left__form-group")}>
                                         <div>
-                                            Price: <span>$12</span> — <span>$600</span>
+                                            Price: <span>${fromPrice}</span> — <span>${toPrice}</span>
                                         </div>
-                                        <Button buttonText secondary small>Filter</Button>
+                                        <Button buttonText secondary small handleOnClick={handleOnFilter}>Filter</Button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                             <div className={cx("left__item")}>
                                 <h5>PRODUCT CATEGORIES</h5>
@@ -147,6 +177,11 @@ function ProductList() {
                                         <span className={`fa fa-search ${cx("icon__search")}`}></span>
                                     </button>
                                 </div>
+                                {errorSearch && (
+                                     <div>
+                                        <p className="message__error">Please enter keyword search</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

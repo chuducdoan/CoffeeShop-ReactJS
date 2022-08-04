@@ -29,6 +29,24 @@ function SignUp() {
     const handleSignUp = async () => {
         try {
             await signUp(email, password, fullname);
+            dispatch(setEmail(''));
+            dispatch(setPassword(''));
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    const handleGoogleSignIn = async () => {
+        try {
+            await googleSignIn();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleFacebookGignIn = async () => {
+        try {
+            await facebookSignIn();
         } catch(error) {
             console.log(error);
         }
@@ -58,10 +76,10 @@ function SignUp() {
                     <hr/>
                 </div>
                 <div className={cx('login__social')}>
-                    <Button buttonIconsRounded buttonIconGoogle onClick={googleSignIn}>
+                    <Button buttonIconsRounded buttonIconGoogle handleOnClick={handleGoogleSignIn}>
                         <i className="fa-brands fa-google"></i>
                     </Button>
-                    <Button buttonIconsRounded buttonIconFacebook onClick={facebookSignIn}>
+                    <Button buttonIconsRounded buttonIconFacebook handleOnClick={handleFacebookGignIn}>
                         <i className="fa-brands fa-facebook-f"></i>
                     </Button>
                     <Button buttonIconsRounded buttonIconTwitter>

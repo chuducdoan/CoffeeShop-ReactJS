@@ -88,3 +88,20 @@
 .message-search {
     margin-bottom: 15px;
 }
+
+.filter-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    .filter__line {
+        flex-shrink: 0;
+        width: 8px;
+        margin: 0 5px;
+        height: 1px;
+        background-color: var(--black);
+        display: inline-block;
+    }
+    input {
+        margin-bottom: 0;
+    }
+}

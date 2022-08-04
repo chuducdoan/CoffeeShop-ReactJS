@@ -1,4 +1,4 @@
-import { ADD_CART, DECREASE_TO_CART, INCREASE_TO_CART, REMOVE_CART } from "~/constant";
+import { ADD_CART, DECREASE_TO_CART, INCREASE_TO_CART, REMOVE_CART, SET_CART } from "~/constant";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -95,6 +95,12 @@ const cartReducer = (state = initState, action) => {
             return {
                 ...state,
                 Carts: newCart
+            }
+        case SET_CART:
+            return {
+                ...state,
+                Carts: action.payload,
+                numberCart: 0
             }
         default:
             return state;

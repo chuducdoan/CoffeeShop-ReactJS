@@ -4,6 +4,7 @@ export const SET_USER = 'set_user';
 export const SET_EMAIL = 'set_email';
 export const SET_PASSWORD = 'set_password';
 export const SET_FULLNAME = 'set_fullname';
+export const SET_CART = 'set_cart';
 export const ADD_CART = 'add_cart';
 export const REMOVE_CART = 'remove_cart';
 export const UPDATE_CART = 'update_cart';

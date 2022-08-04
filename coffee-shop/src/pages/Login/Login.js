@@ -104,9 +104,6 @@ function Login() {
                     <Button buttonIconsRounded buttonIconFacebook handleOnClick={handleFacebookGignIn}>
                         <i className="fa-brands fa-facebook-f"></i>
                     </Button>
-                    <Button buttonIconsRounded buttonIconTwitter handleOnClick={handleGoogleSignIn}>
-                        <i className="fab fa-twitter"></i>
-                    </Button>
                 </div>
             </div>
         </div>

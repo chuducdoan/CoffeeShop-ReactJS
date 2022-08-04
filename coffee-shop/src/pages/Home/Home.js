@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { addCart } from "~/action";
+import {ToastContainer} from 'react-toastify'
 
 import blogApi from "~/api/blogApi";
 import productApi from "~/api/productApi";
@@ -165,6 +166,7 @@ function Home() {
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore"
                     />
                     <div className="grid">
+                        <ToastContainer/>
                         <div className="row">
                             {productNews.map((product, index) => (
                                 <div className="col-sm-6 col-md-3 col-lg-3" key={index}>

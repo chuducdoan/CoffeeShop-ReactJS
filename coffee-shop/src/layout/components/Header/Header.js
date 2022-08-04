@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
-import { logout, removeCart, setEmail, setPassword } from '~/action';
+import { logout, removeCart, setCart, setEmail, setPassword } from '~/action';
 import Button from '~/components/Button';
 import Popper from '~/components/Popper';
 import config from '~/config';
@@ -22,8 +22,7 @@ function Header() {
 
     const handleLogout = () => {
         dispatch(logout());
-        dispatch(setEmail(''));
-        dispatch(setPassword(''));
+        dispatch(setCart([]));
     }
 
     const handleRemoveCartItem = (cartId) => {
