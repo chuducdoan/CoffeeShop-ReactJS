@@ -12,6 +12,10 @@ const productApi = {
     getProductsByCategory: (categoryId, params) => {
         const url = `/categories/${categoryId}/products`;
         return axiosClient.get(url, {params});
+    },
+    getImagesByProduct: (productId) => {
+        const url =  `/products/${productId}/images`;
+        return axiosClient.get(url)
     }
 }
 

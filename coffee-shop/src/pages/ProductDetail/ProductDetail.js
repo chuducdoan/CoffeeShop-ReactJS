@@ -20,6 +20,7 @@ function ProductDetail() {
     const {productId} = useParams();
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [productDetail, setProductDetail] = useState({});
+    const [images, setImages] = useState([]);
     const [numberProduct, setNumberProduct] = useState(1);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -36,7 +37,12 @@ function ProductDetail() {
                 setProductDetail(response);
                 setRelatedProducts(res)
             }
+            const fetchImagesByProduct = async () => {
+                const response = await productApi.getImagesByProduct(productId);
+                setImages(response);
+            }
             fetchProductDetail();
+            fetchImagesByProduct();
         } catch(error) {
             console.log(error);
         }
@@ -77,15 +83,11 @@ function ProductDetail() {
                             <div className={cx("product-detail__image")}>
                                 <img src={productDetail.thumnailUrl} alt={productDetail.name}/>
                             </div>
-                            <div className={cx("product-detail__image")}>
-                                <img src="assets/images/product-detail-4.jpg" alt=""/>
-                            </div>
-                            <div className={cx("product-detail__image")}>
-                                <img src="assets/images/product-detail-2.jpg" alt=""/>
-                            </div>
-                            <div className={cx("product-detail__image")}>
-                                <img src="assets/images/product-detail-3.jpg" alt=""/>
-                            </div>
+                            {images.map((image, index) => (
+                                <div className={cx("product-detail__image")}>
+                                    <img src={image.thumnailUrl} alt={image.name}/>
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className="col-xl-6">
@@ -96,9 +98,6 @@ function ProductDetail() {
                                     <span>$</span><span>{productDetail.price}</span>
                                 </span>
                             </p>
-                            <div className={cx("product-detail__rating")}>
-                                <span>start</span>
-                            </div>
                             <p className={cx("product-detail__description")}>
                                 {productDetail.description}
                             </p>
