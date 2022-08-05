@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
+
 import config from "~/config/index.js";
 import Button from "../Button/Button.js";
-
 import styles from './Banner.module.scss';
 
 const cx = classNames.bind(styles);
@@ -16,6 +16,7 @@ function Banner({
     productList,
     checkout, 
     children}) {
+
     const classes = cx('banner', {
         about,
         contactUs,
@@ -23,7 +24,8 @@ function Banner({
         cart,
         checkout,
         productList
-    })
+    });
+
     return (
         <div className={classes}>
                 <div className={cx("banner__resp")}>

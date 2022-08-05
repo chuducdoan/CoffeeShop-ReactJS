@@ -1,4 +1,15 @@
-import { ADD_CART, DECREASE_TO_CART, INCREASE_TO_CART, LOGOUT, REMOVE_CART, SET_CART, SET_EMAIL, SET_FULLNAME, SET_PASSWORD, SET_USER } from '~/constant';
+import { 
+    ADD_CART, 
+    DECREASE_TO_CART, 
+    INCREASE_TO_CART, 
+    LOGOUT, 
+    REMOVE_CART, 
+    SET_CART, 
+    SET_EMAIL, 
+    SET_FULLNAME, 
+    SET_PASSWORD, 
+    SET_USER 
+} from '~/constant';
 
 export const setUser = (payload) => {
     return {

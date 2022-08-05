@@ -2,10 +2,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
-import { logout, removeCart, setCart, setEmail, setPassword } from '~/action';
+import { logout, removeCart, setCart } from '~/action';
 import Button from '~/components/Button';
 import Popper from '~/components/Popper';
 import config from '~/config';
@@ -15,6 +14,7 @@ import styles from './Header.module.scss';
 const cx = classNames.bind(styles);
 
 function Header() {
+    
     const user = useSelector(state => state.authRed.user);
     const numberCart = useSelector(state => state.cartRed.numberCart);
     const carts = useSelector(state => state.cartRed.Carts);

@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
+
 import styles from './BlogItem.module.scss';
 
 const cx = classNames.bind(styles);

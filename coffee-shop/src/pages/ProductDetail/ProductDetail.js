@@ -1,9 +1,10 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import classNames from "classnames/bind";
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from "react-router-dom";
+import {ToastContainer} from 'react-toastify';
+
 import { addCart } from '~/action';
 import productApi from "~/api/productApi";
 import Banner from "~/components/Banner";
@@ -11,11 +12,11 @@ import Button from "~/components/Button";
 import ProductItem from "~/components/ProductItem";
 import config from "~/config";
 import styles from './ProductDetail.module.scss';
-import {ToastContainer} from 'react-toastify';
 
 const cx = classNames.bind(styles);
 
 function ProductDetail() {
+    
     const user = useSelector(state => state.authRed.user);
     const {productId} = useParams();
     const [relatedProducts, setRelatedProducts] = useState([]);

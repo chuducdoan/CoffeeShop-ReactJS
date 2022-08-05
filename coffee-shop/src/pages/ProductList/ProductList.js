@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import { addCart } from "~/action";
 import categoryApi from "~/api/categoryApi";
 import productApi from "~/api/productApi";
@@ -46,25 +47,29 @@ function ProductList() {
     const categoryId = new URLSearchParams(search).get('categoryId');
 
     useEffect(() => {
-        let params = filter;
-        if (categoryId !== null) {
-            params = {...params, categoryId: categoryId}
-        }
-        const fetchProducts = async () => {
-            const response = await productApi.getAll(params);
-            setProducts(response.data);
-            setPagination(response.pagination);
-        }
-        fetchProducts();
+        try {
+            let params = filter;
+            if (categoryId !== null) {
+                params = {...params, categoryId: categoryId}
+            }
+            const fetchProducts = async () => {
+                const response = await productApi.getAll(params);
+                setProducts(response.data);
+                setPagination(response.pagination);
+            }
+            fetchProducts();
 
-        const fetcgCategories = async () => {
-            const response = await categoryApi.getAll();
-            categoriesRef.current = response;
-            setCategories(response);
+            const fetcgCategories = async () => {
+                const response = await categoryApi.getAll();
+                categoriesRef.current = response;
+                setCategories(response);
+            }
+            fetcgCategories();
+            setError(false);
+            setErrorSearch(false);
+        } catch (error) {
+            console.log(error);
         }
-        fetcgCategories();
-        setError(false);
-        setErrorSearch(false);
     }, [categoryId, filter]);
 
     const handleSearch = () => {

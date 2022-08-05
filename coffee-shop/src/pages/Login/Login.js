@@ -4,20 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import InputGroup from '~/components/InputGroup';
-
 import { useEffect, useState } from 'react';
+
+import InputGroup from '~/components/InputGroup';
 import { setEmail, setPassword } from '~/action';
 import Button from '~/components/Button';
 import config from '~/config';
-import { ERROR_LOGIN, MESSAGE_VALIDATE_FORMAT_EMAIL, MESSAGE_VALIDATE_LENGTH_PASSWORD, MESSAGE_VALIDATE_REQUIRE_EMAIL, MESSAGE_VALIDATE_REQUIRE_PASSWORD } from '~/constant';
 import { UserAuth } from '~/context/AuthContext';
 import { validateEmailFormat, validateLength, validateRequired } from '~/util';
 import styles from './Login.module.scss';
+import { 
+    ERROR_LOGIN, 
+    MESSAGE_VALIDATE_FORMAT_EMAIL, 
+    MESSAGE_VALIDATE_LENGTH_PASSWORD, 
+    MESSAGE_VALIDATE_REQUIRE_EMAIL, 
+    MESSAGE_VALIDATE_REQUIRE_PASSWORD } from '~/constant';
 
 const cx = classNames.bind(styles);
 
 function Login() {
+    
     const user = useSelector(state => state.authRed.user);
     const email = useSelector(state => state.authRed.email);
     const password = useSelector(state => state.authRed.password);

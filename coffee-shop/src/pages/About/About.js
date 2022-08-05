@@ -1,10 +1,12 @@
 import classNames from "classnames/bind";
+
 import Banner from "~/components/Banner";
 import Galley from "~/components/Galley";
 import TextWrapper from "~/components/TextWrapper";
 import style from './About.module.scss';
 
 const cx = classNames.bind(style);
+
 const galleys = [
     {
         title: <i className="fa fa-plus" aria-hidden="true"></i>,

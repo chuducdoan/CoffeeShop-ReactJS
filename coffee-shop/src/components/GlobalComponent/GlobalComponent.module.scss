@@ -24,6 +24,7 @@
     --gray7: #b3b3b3;
     --gray8: #f6f6f6;
     --gray9: #ebebeb;
+    --gray10: #989898;
     --fontSize12: 12px;
     --fontSize14: 14px;
     --fontSize15: 15px;
@@ -32,6 +33,7 @@
     --fontSize20: 20px;
     --fontSize22: 22px;
     --fontSize28: 28px;
+    --fontSize35: 35px;
     --fontSize45: 45px;
     --colorRGBA: rgba(0, 0, 0, .69);
 }
@@ -72,9 +74,6 @@ a {
     transition: color .3s ease;
 }
 
-// a:hover {
-//     color: var(--yellow);
-// }
 h1,
 h2 {
     line-height: 1.22em;

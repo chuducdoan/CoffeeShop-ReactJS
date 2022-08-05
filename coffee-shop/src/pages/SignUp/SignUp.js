@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
-import InputGroup from '~/components/InputGroup';
-
 import { useEffect } from 'react';
+
+import InputGroup from '~/components/InputGroup';
 import { setEmail, setFullname, setPassword } from '~/action';
 import Button from '~/components/Button';
 import config from '~/config';

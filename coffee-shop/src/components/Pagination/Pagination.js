@@ -1,12 +1,13 @@
 import classNames from "classnames/bind";
+import { useEffect, useState } from "react";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import styles from './Pagination.module.scss';
-import { useEffect, useState } from "react";
 
 const cx = classNames.bind(styles);
 
 function Pagination({pagination, onPageChange}) {
+    
     const {_limit, _page, _totalRows} = pagination;
     const totalPage = Math.ceil(_totalRows/_limit);
     const [pages, setPages] = useState(() => {

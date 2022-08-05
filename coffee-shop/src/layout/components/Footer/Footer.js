@@ -1,13 +1,14 @@
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import styles from './Footer.module.scss';
-import { Link } from 'react-router-dom';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    
     return ( 
         <footer className={cx("footer")}>
             <div className={cx("footer__top")}>

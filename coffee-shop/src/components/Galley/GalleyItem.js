@@ -6,13 +6,8 @@ import styles from './Galley.module.scss';
 
 const cx = classNames.bind(styles);
 
-function GalleyItem({image, title, className, to, page = "default", children}) {
-    // const Tag = "h3";
-    // useMemo(() => {
-    //     if (pahe === "about") {
+function GalleyItem({image, title, className, to}) {
 
-    //     }
-    // }, [page])
     return ( 
         <div className={cx("galley__item", className)}>
             <div className={cx("galley__image")}>

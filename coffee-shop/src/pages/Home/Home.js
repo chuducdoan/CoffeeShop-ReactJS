@@ -17,6 +17,7 @@ import config from "~/config";
 import style from './Home.module.scss';
 
 const cx = classNames.bind(style);
+
 const galleys = [
     {
         title: 'Perfect Cup',

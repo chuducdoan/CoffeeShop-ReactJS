@@ -1,4 +1,10 @@
-import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+import { 
+    createUserWithEmailAndPassword, 
+    FacebookAuthProvider, 
+    GoogleAuthProvider, 
+    signInWithEmailAndPassword, 
+    signInWithPopup, 
+    updateProfile } from 'firebase/auth';
 import { createContext, useContext } from "react";
 import { auth } from "~/firebase";
 

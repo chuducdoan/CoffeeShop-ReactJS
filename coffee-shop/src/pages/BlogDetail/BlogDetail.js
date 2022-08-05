@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
 import blogApi from "~/api/blogApi";
 import config from "~/config";
 import { formatDate } from "~/util";
@@ -10,8 +11,8 @@ import styles from "./BlogDetail.module.scss";
 const cx = classNames.bind(styles);
 
 function BlogDetail() {
-    const {blogId} = useParams();
 
+    const {blogId} = useParams();
     const [blog, setBlog] = useState({});
     const [blogNews, setBlogNews] = useState([]);
 

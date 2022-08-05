@@ -213,7 +213,7 @@
 }
 
 .logout {
-    font-size: 18px;
+    font-size: var(--fontSize18);
     font-weight: 400;
     cursor: pointer;
     &:hover {
